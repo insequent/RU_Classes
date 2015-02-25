@@ -1,0 +1,106 @@
+<!DOCTYPE html><head></head><body>
+<pre>
+#!/usr/bin/env python2
+# -*- coding: utf-8 -*-
+
+""" 
+
+:mod:`lab03_complex_types` -- Complex Data Types 
+===================================================
+
+Create and print an initialized variable for each of the complex types:
+   tuple, list, dict, set
+   (each should have 3 objects)   
+
+How are tuples commonly used?
+
+What does changing an object "in-place" mean?
+
+Use the append(), extend(), insert(), remove(), count(), sort(), reverse(), and index() 
+functions on your list. Print each result.
+
+Use the iteritems(), iterkeys(), itervalues() on your dictionary. Print the
+   results.
+
+Use the "in" operator to find a key in your dictionary.
+
+Make a copy of your dictionary with copy(). Print the copy.
+
+"""
+
+if __name__ == "__main__":
+
+    x = 22.8
+    print "create tuple"
+    simple_tuple = ("hi", "there", x)
+    print simple_tuple
+    
+    print "create list"
+    simple_list = [1, 2, 3]
+    print simple_list
+
+    print "create dictionary"
+    simple_dictionary = {"key_1": "one", x: "two", 3: "three"}
+    print simple_dictionary
+
+    print "create set"
+    simple_set = {"one", "two", "three"}
+    print simple_set
+
+    print "How are tuples commonly used?"
+    print "Functions can return mult items in a tuple which are easily unpacked"
+
+    print "What does changing an object 'in-place' mean?"
+    print "Changing it in the same memory location i.e. no new object is returned"
+
+    print "Use append(), extend(), insert(), remove(), count(), sort(), reverse(), and index()"
+    print "Append 4 "
+    simple_list.append(4)
+    print simple_list
+
+    print "Extend with string abc"
+    simple_list.extend("abc")
+    print simple_list
+
+    print "Insert 'inserted' "
+    simple_list.insert(2, "inserted")
+    print simple_list
+
+    print "Remove 2"
+    simple_list.remove(2)
+    print simple_list
+
+    print "Count how many 4's"
+    print simple_list.count(4)
+
+    print "Sort the list in-place and reverse it"
+    simple_list.sort()
+    print simple_list
+    simple_list.reverse() 
+    print simple_list
+
+    print "Get the index of 3"
+    print simple_list.index(3)
+
+    print "Use iteritems(), iterkeys(), itervalues() on the dictionary"
+    for i in simple_dictionary.iteritems():
+        print i
+    for i in simple_dictionary.iterkeys():
+        print i
+    for i in simple_dictionary.itervalues():
+        print i
+
+    print "Is 3 in the dictionary as a key?"
+    print 3 in simple_dictionary
+
+    print " Make a copy of the dictionary"
+    new_dictionary = simple_dictionary.copy()
+    print new_dictionary
+    
+
+
+
+</pre>
+
+</body></html>
+

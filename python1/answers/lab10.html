@@ -1,0 +1,131 @@
+<!DOCTYPE html><head></head><body>
+<pre>
+#!/usr/bin/env python2
+# -*- coding: utf-8 -*-
+
+""" 
+
+:mod:`lab10_string_formatting` --- String formatting
+====================================================
+
+Find some documentation on string formatting operations using the "%" operator
+
+Print 6.2399 using a format specifier that keeps 3 decimal places
+
+Print 0x31 using a decimal format specifier
+
+Print 0b11011011 using a hexidecimal string format specifier
+
+Demonstrate the other string formatting approach using format()
+
+In lotto.py, define a new function **print_results()** that accepts one argument:
+ 
+ A dictionary containing
+
+ #. drawings: the number of drawings held: 104
+ #. elapsed: the number of seconds the simulation took: 0.13
+ #. max_ball_number: the number of balls for each pick: 54
+ #. quick_pick: whether quick pick was chosen: False
+ #. picks: the numbers picked to run simulation with: {33, 4, 18, 19, 52, 21}
+ #. results: a dictionary containing {0:88, 1:13, 2:3, 3:0, 4:1, 5:0, 6:0}
+
+Print a report that outputs the dictionary contents like this:
+
+::
+
+ Results for 104 drawings - 6 out of 54
+ Selected numbers: 33, 4, 18, 19, 52, 21 
+ Odds of matching all numbers: 1 in 18595558800
+
+ # Matches   Count    Percentage
+ =========   =====    ==========
+    0         88       84.615
+    1         13       12.500
+    2          3        2.885
+    3          0        0.000
+    4          1        0.962
+    5          0        0.000
+    6          0        0.000
+
+ Ran 104 simulations in 0.130 seconds
+ For a twice-a-week lotto system, that would be the equivalent
+ of 1.00 years worth of drawings.
+
+"""
+
+# Note: this is lotto.py
+
+import argparse
+
+DRAWS_PER_YEAR = 104
+RANDOM_MIX = 20
+DEFAULT_NUM_BALLS = 54
+DEFAULT_YEARS = 1
+DEFAULT_NUM_PICKS = 6
+
+
+def calc_odds(max_ball_number=None, num_picks=None):
+  
+    """ Returns odds of winning as a percentage """
+
+    if max_ball_number is None:
+        max_ball_number = DEFAULT_NUM_BALLS
+    if num_picks is None:
+        num_picks = DEFAULT_NUM_PICKS
+    rng = [max_ball_number - val for val in xrange(num_picks)]
+    odds = reduce(lambda a, b: a*b, rng)
+    return odds
+
+
+def print_results(pinfo):
+    total_runs = pinfo['drawings']
+    elapsed = pinfo['elapsed']
+    num_picks = DEFAULT_NUM_PICKS
+    max_ball_number = pinfo['max_ball_number']
+    years = total_runs / 104.0
+    odds = calc_odds(max_ball_number=max_ball_number, num_picks=num_picks)
+
+    result_lines = [
+                    "    %i        %3.0f       %6.3f" % 
+                    (k, v, v*100.0/total_runs) for k, v in pinfo['results'].iteritems() 
+                    ] 
+
+    results_formatted = "\n".join(result_lines)
+    qp_status = "(QP)" if pinfo['quick_pick'] else ""  # note the ternary statement
+    selected = ", ".join([str(ch) for ch in pinfo['picks']])
+    out = """
+Results for %(total_runs)s drawings - %(num_picks)s out of %(max_ball_number)s
+Selected numbers: %(selected)s %(qp_status)s
+Odds of matching all numbers: 1 in %(odds)s
+
+# Matches   Count    Percentage
+=========   =====    ==========
+%(results_formatted)s
+
+Ran %(total_runs)s simulations in %(elapsed).3f seconds
+For a twice-a-week lotto system, that would be the equivalent
+of %(years).2f years worth of drawings.
+"""
+    print out % locals()
+
+
+if __name__ == "__main__":
+
+    print "%.3f -- %d -- %x" % (6.2399, 0x31, 0b11011011)
+    print "{0:.3f} -- {1:d} -- {2:x}".format(6.2399, 0x31, 0b11011011)
+
+    mock_simulation = {
+                       "drawings": 104,
+                       "elapsed": 0.13,
+                       "max_ball_number": 54,
+                       "quick_pick": False,
+                       "picks": {33, 21, 52, 18, 4, 19},
+                       "results": {0: 88, 1: 13, 2: 2, 3: 0, 4: 1, 5: 0, 6: 0}
+                       }
+    
+    print_results(mock_simulation)
+
+</pre>
+
+</body></html>
+

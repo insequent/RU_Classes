@@ -1,0 +1,45 @@
+<!DOCTYPE html><head></head><body><pre>
+#!/usr/bin/env python2
+# -*- coding: utf-8 -*-
+
+""" 
+
+:mod:`lab06_functions` -- Functions 
+===================================
+
+Read the online documentation for the **argparse** module
+
+What is the difference between options and arguments?
+
+In lotto.py. create an new argparse object with description *Virtual Lottery Simulation Engine*
+(We have not covered classes yet, so just copy/paste the argparse example pre)
+
+ import argparse
+ ...
+ parser = argparse.ArgumentParser()
+ args = parser.parse_args()
+
+Accept 2 command line arguments setting dest, default, and help options:
+ #. -b (also --max_ball_num) which is the number of lotto balls. Default = DEFAULT_MAX_BALL_NUM
+ #. -y (also --years) which is the number of years of drawings to run. Default = 1
+ 
+Hint: You want something similar to the '--sum' in the example pre.
+
+Print the resulting **args** object. How does dest relate to args?
+
+Test the **-h** option, then **-b** and **-y** together and separately
+
+Define a new function called **calc_odds()** that accepts 2 arguments:
+ #. max_ball_num
+ #. num_picks (default = DEFAULT_NUM_PICKS)
+
+Have calc_odds() return the odds of winning (getting all num_picks choices correct) where order is not significant: 
+
+def calc_odds(max_ball_num = DEFAULT_MAX_BALL_NUM, num_picks = DEFAULT_NUM_PICKS)
+    odds = 1
+    for x in range(num_picks):
+        odds *= (max_ball_num - x) / (num_picks - x)
+    return odds
+"""
+</pre></html>
+

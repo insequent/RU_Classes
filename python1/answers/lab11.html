@@ -1,0 +1,46 @@
+<!DOCTYPE html><head></head><body>
+<pre>
+#!/usr/bin/env python2
+# -*- coding: utf-8 -*-
+
+""" 
+
+:mod:`lab11_generators` --- Generators
+======================================
+
+Write a generator that returns an increasing integer
+   (if the integer is even) or the string "odd" if
+   the integer is odd.
+
+Test your generator by calling next() 4 times.
+
+"""
+
+
+def gen2(start):
+    n = start
+    while True:
+        if n % 2 == 1:
+            result = "odd"
+        else:
+            result = n
+        yield result
+        n += 1
+
+if __name__ == "__main__":
+
+    x = gen2(1)
+    print "What is x holding?"
+    print x
+    print "Calling generator 4 times"
+    
+    print x.next()
+    print x.next()
+    print x.next()
+    print x.next()
+
+
+</pre>
+
+</body></html>
+

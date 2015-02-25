@@ -1,0 +1,38 @@
+<!DOCTYPE html><head></head><body>
+<pre>
+#!/usr/bin/env python2
+# -*- coding: utf-8 -*-
+
+""" 
+
+:mod:`lab04_bitwise` -- Bitwise Operations
+==========================================
+
+Create two binary numbers and print them.
+
+Print the results of AND'ing, OR'ing, and XOR'ing the numbers together.
+   Are the answers what you expect? What base are they?
+
+Stretch goal: Figure out how to output the answer in binary
+
+"""
+
+if __name__ == "__main__":
+
+    my_binary_1 = 0b1110
+    my_binary_2 = 0b0010
+
+    print my_binary_1, my_binary_2
+    print "AND result:", my_binary_1 & my_binary_2
+    print "OR result:", my_binary_1 | my_binary_2
+    print "XOR result:", my_binary_1 ^ my_binary_2
+
+    print "Stretch goal:"
+    print "AND result:", bin(my_binary_1 & my_binary_2)
+    print "OR result:", bin(my_binary_1 | my_binary_2)
+    print "XOR result:", bin(my_binary_1 ^ my_binary_2)
+
+</pre>
+
+</body></html>
+

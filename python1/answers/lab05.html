@@ -1,0 +1,52 @@
+<!DOCTYPE html><head></head><body>
+<pre>
+#!/usr/bin/env python2
+# -*- coding: utf-8 -*-
+
+""" 
+
+:mod:`lab05_pyglatin` --- Pyg Latin Translator
+==============================================
+
+Create a module named lab05_pyglatin.py that asks for a word with raw_input() and converts
+it to "pyg latin":
+
+ #. If word starts with a vowel, just add "ay" to the end
+ #. Otherwise move the first character to the end of the word and then add "ay"
+
+"""
+
+
+def pygify(var):
+    
+    """ Returns var in pyg latin form """
+
+    VOWELS = 'aeiou'
+
+    if var[0].lower() in VOWELS:
+        result = var + "ay"
+    else:
+        result = var[1:] + var[0] + "ay"
+    return result
+
+
+if __name__ == "__main__":
+
+    the_word = raw_input("\nPyg latin translator: what's the word? ")
+
+    # first some sanity checks
+
+    if not the_word:  # is the word empty?
+        print "No word received"
+    elif not the_word.isalpha():  # is the word alpha only (no whitespace or numbers)?
+        print "Must be a single word"
+    else:
+        pygified_the_word = pygify(the_word)
+    
+        print "pyg latin version:", pygified_the_word
+
+
+</pre>
+
+</body></html>
+

@@ -1,0 +1,1270 @@
+<!doctype html>
+<html lang="en">
+
+	<head>
+		<meta charset="utf-8">
+
+		<title>Python_II</title>
+
+		<link rel="stylesheet" href="css/reveal.min.css">
+		<link rel="stylesheet" href="css/theme/moon.css" id="theme">
+
+		<!-- For syntax highlighting -->
+		<link rel="stylesheet" href="lib/css/zenburn.css">
+
+		<!-- If the query includes 'print-pdf', use the PDF print sheet -->
+		<script>
+			document.write( '<link rel="stylesheet" href="css/print/' + 
+                        ( window.location.search.match( /print-pdf/gi ) ? 'pdf' : 'paper' ) + 
+                        '.css" type="text/css" media="print">' );
+		</script>
+
+		<!--[if lt IE 9]>
+		<script src="lib/js/html5shiv.js"></script>
+		<![endif]-->
+	</head>
+
+	<body>
+
+		<div class="reveal">
+
+			<!-- Section elements inside of class="slides" div are displayed as a new slide -->
+			<!-- Press ESC to enter the slide overview. -->
+                        <!-- Alt + click on any element to zoom it.  Alt + click anywhere to zoom back out. -->
+			<!-- Press 'b' or '.' to black out slide while talking.  -->
+			<!-- Use links in list: <ul><li><a href="xxx">stuff</a></li></ul> -->
+                        <!-- Transition styles: cube, page, concave, zoom, linear, fade, none. e.g. <a href="?transition=cube#/transitions">Cube</a> -->
+                        <!-- Themes: sky, beige, simple, serif, night.. e.g. <a href="?theme=sky#/themes">Sky</a> -->
+                        <!-- Images:<img width="x" height="y" src="images/xyz.png" alt="Description"> --> 
+                        <!-- Export slides to pdf by using "print-pdf" on URL and cntl-p save as a PDF-->
+			<!-- For editable code use left justified snippets:
+				<pre><code contenteditable>
+function funky( selector ) {
+  if( supports3DTransforms ) {some_random_function()}
+				</code></pre>
+			-->
+                        <!-- Step through bullets with class="fragment" or: 
+						 class="fragment grow"
+						 class="fragment shrink"
+						 class="fragment roll-in"
+						 class="fragment fade-out"
+						 class="fragment highlight-red"
+						 class="fragment highlight-green"
+						 class="fragment highlight-blue"
+                        -->
+			<!-- Sections can be nested for vertical slide navigation -->
+                        <!-- Link between slides internally: e.g. <a href="#/2/3">like this</a> -->
+                        <!-- Can use markdown instead of HTML -->
+                        <!-- Can put popup notes on a slide with <aside class="notes"> Some notes! (hit 's' to see popup)</aside> -->
+
+<div class="slides">
+
+<section>
+<h1>Python II</h1>
+<p><img  width="600" height="400" src="images/bug_or_feature.jpg" alt="Bug or Feature cartoon"></p>
+<br>
+<span style="float:right; font-size: x-small">Revision 11.06.13</span>
+</section>
+
+<!-- Commenting it out since class is at Rackspace
+<section>
+<br>
+<h2>NLC Info</h2>
+<ul><br>
+<li class="fragment">
+Rackspace parking sticker works
+</li><br>
+<li class="fragment">
+Racker breakroom marked 'Laundry' on 1st floor 
+</li><br>
+<li class="fragment">
+Speeding on campus = easy ticket
+</li><br>
+<li class="fragment">
+Must go off property to smoke
+</li><br>
+<li class="fragment">
+Please sign in each day. Class starts at 08:30
+</li>
+</ul>
+</section>
+
+
+<section>
+<br><h2>
+Paperwork
+</h2>
+<ul><br>
+<li class="fragment">
+NLC registration
+</li><br>
+<li class="fragment">
+RU roster
+</li><br>
+<li class="fragment">
+Email signup sheet
+</li><br>
+<li class="fragment">
+Core Python Applications, 3rd Edition, Wesley Chun, <br>ISBN 978-0-13-267820-9
+</li>
+</ul>
+</section>
+-->
+
+<section>
+<br><h2>
+Introductions
+</h2>
+<ul><br>
+<li class="fragment">
+Instructor Contact Info
+</li><br>
+<li class="fragment">
+Introductions
+</li><br>
+<li class="fragment">
+Any previous programming?
+</li><br>
+<li class="fragment">
+Why did you sign up?
+</li><br>
+<li class="fragment">
+Define success for you in this course
+</li>
+</ul>
+</section>
+
+<!-- Not pertinent to class at the Castle
+<section>
+<br><h2>
+Lab Info
+</h2>
+<ul><br>
+<li class="fragment">
+Lab machines act as a pass through to the NLC cloud (CentOS VM's)
+</li><br>
+<li class="fragment">
+ssh -l student -p 401XX nlccloud.edgecloud.com<br>
+ (use 192.168.3.10 on campus)
+</li><br>
+<li class="fragment">
+scp -P 401XX local_file student@nlccloud.edgecloud.com:class/remote_file<br>
+scp -P 401XX student@nlccloud.edgecloud.com:class/remote_filename &nbsp;&nbsp;.
+</li><br>
+<li class="fragment">
+Available 24x7 during class
+</li>
+</ul>
+</section>
+-->
+
+
+<section>
+<br><h2>This Course</h2><ul>
+<br><li class="fragment">Assumes programming concepts contained in Python I or equiv experience</li>
+<br><li class="fragment"><strong>What it is:</strong></li>
+<li class="fragment">Python (2.7+ covered, 3+ optional)</li>
+<li class="fragment">Topics: JSON, ReST client, PEP249 (DB-API), subprocess, decorators, threads/multiprocessing, ReST server </li>
+<br><li class="fragment"><strong>What it’s not:</strong></li>
+<li class="fragment">Math or graphics</li>
+<li class="fragment">Python internals</li>
+<li class="fragment">Python frameworks</li>
+</ul></section>
+
+<section>
+<br><h2>Ways to Run Python</h2><ul>
+<br><li class="fragment">IPython is is recommended (http://ipython.org) (requires pyreadline)</li>
+<br><li class="fragment">Also recommend running in a virtualenv sandbox for custom control of the environment.</li>
+<br><li class="fragment">See the cheeseshop for package downloads (http://pypi.python.org)</li>
+</ul></section>
+
+<section>
+<br><h2>virtualenv</h2><ul>
+<br><li class="fragment">Creates an isolated python environment customized to your version and dependency requirements</li>
+<br><li class="fragment">Comes with distribute, easy_install, and pip</li>
+<br><li class="fragment">Allows control of environments where root authority is lacking</li>
+<br><li class="fragment">Install and activate/deactivate:</li>
+<li class="fragment">python virtualenv.py --distribute &lt;new env&gt;</li>
+<li class="fragment">cd &lt;new env&gt;</li>
+<li class="fragment">source bin/activate (or deactivate)</li>
+</ul></section>
+
+<section>
+<br><h2>pip</h2><ul>
+<br><li class="fragment">pip is the newest python package manager tool</li>
+<br><li class="fragment">pip install &lt;package name or package file&gt;</li>
+<br><li class="fragment">pip search &lt;package name&gt;</li>
+<br><li class="fragment">Use --upgrade option for existing packages</li>
+</ul></section>
+
+<section>
+<br><h2>Quick Review</h2><ul>
+<br><li>Anatomy of a Module</li>
+<pre style="padding: 50px" >
+#!/usr/bin/env python2
+# -*- coding: utf-8 -*-
+# Line #1 = shebang
+# Line #2 = encoding declaration
+
+Docstrings
+Inline documentation
+
+Import(s)
+External code sources called modules
+
+Statements
+</pre>
+</section>
+
+<section>
+<br><h2>Python Keywords</h2><ul>
+<pre style="padding: 50px">
+and       del       from      not       while
+as        elif      global    or        with
+assert    else      if        pass      yield
+break     except    import    print
+class     exec      in        raise
+continue  finally   is        return
+def       for       lambda    try
+</pre>
+<br><li class="fragment">Reserved for use by Python</li>
+</ul></section>
+
+<section>
+<h2>tuple Type</h2><ul>
+<br><li class="fragment">Tuples are sequences of other objects that cannot be changed (they are “immutable”)</li>
+<br><li class="fragment">Tuples can contain any type of object, and can be sliced (remember, they’re ordered)</li>
+<br><li class="fragment">A one element tuple is formed by (element,) where the comma makes it a tuple</li>
+<br><li class="fragment">Examples:</li>
+<pre class="fragment">  tup = (1, "a", 3)
+  tup = tuple()
+  tup = (1,) # Comma needed for single element
+  gen = (x**2 for x in range(1,4)) # Not a tuple!</pre>
+</ul></section>
+
+<section>
+<h2>list Type</h2><ul>
+<br><li class="fragment">Lists are sequences that can be changed (“mutable”)</li>
+<br><li class="fragment">Lists can contain other object types and be sliced</li>
+<br><li class="fragment">A list is a set of objects separated by commas and closed in square brackets</li>
+<br><li class="fragment">Examples:</li>
+<pre class="fragment">  lst = [1, "a", 3]
+  lst = list()
+  lst = [x for x in xrange(5)]</pre>
+</ul></section>
+
+<section>
+<h2>dictionary Type</h2><ul>
+<br><li class="fragment">A dictionary (“dict”) type is a set of expressions that are associated 1 to 1 with other expressions</li>
+<br><li class="fragment">A dict provides a handy “mapping” between a “key” expression and its associated “value” expression</li>
+<br><li class="fragment">A dict is not an ordered sequence, it’s a mapping.</li>
+<br><li class="fragment">Examples:</li>
+<pre class="fragment">  dic = {"a": 1}
+  dic = dict(a=1)
+  dic = {x: ord(x) for x in range(97, 107)}</pre>
+</ul></section>
+
+<section>
+<h2>set Type</h2><ul>
+<br><li class="fragment">A set is a mutable group of unordered immutable objects with unique values i.e. no duplicates (so the set is mutable, but not the objects within it)</li>
+<li class="fragment">Uses the ‘{}’ symbols just like a dictionary, but doesn’t have ‘:’ i.e. no key/value pairs</li>
+<li class="fragment">Slicing is not allowed (why?), but iterators work</li>
+<li class="fragment">Set operations are powerful, but perhaps not the most efficient</li>
+<li class="fragment">Examples:</li>
+<pre class="fragment">  st = {1,2,2,3}
+  st = set(1,2,2,3)
+  st = {x for x in range(1,4)}</pre>
+</ul></section>
+
+<section>
+<br><h2>yield Statement</h2><ul>
+<br><li class="fragment">yield is similar to return, but suspends execution of the called function instead of ending the function</li>
+<br><li class="fragment">On the next call to the function, yield picks up where it left off, with all identifier values still holding the same values i.e. loses its stack entry</li>
+<br><li class="fragment">Appearance of yield signals a generator</li>
+</ul></section>
+
+<section>
+<br><h2>with Statement</h2><ul>
+<br><li class="fragment">The with statement is used to run a suite of other statements under a “context manager” </li>
+<br><li class="fragment">Special methods __entry__() and __exit() are called to setup and takedown a “context”</li>
+<br><li class="fragment">Common for doing i/o (which auto-closes the file handle) and threading (which auto-acquires and releases lock)</li>
+</ul></section>
+
+<section>
+<br><h2>import &amp; from Statements</h2><ul>
+<br><li class="fragment">To make a set of identifiers in another module available for use by your module, you must first use import or from</li>
+<br><li class="fragment">import pulls in identifiers from module(s) but the module name must be used as a prefix (only module name is added to local namespace)</li>
+<br><li class="fragment">from pulls in identifiers from modules but avoids need to prefix with the module name (identifier is added to local namespace)</li>
+</ul></section>
+
+<section>
+<br><h2>The calculator package</h2>
+<pre style="padding: 50px">
+calculator
+   __init__.py
+operations
+   __init__.py
+   arithmetic.py
+display
+   __init__.py
+   scientific.py
+   algebraic.py
+</pre>
+</section>
+
+<section>
+<br><h2>File Objects</h2>
+<p> Use the with statement if possible. <br>Why?
+<pre style="padding: 50px">
+with open(“file_path”,&lt;mode&gt;) as fh:
+# &lt;mode&gt; = “r” for read only; ”rb”
+#          “w” for write only; “wb”
+#          “a” for append
+for line in fh:
+    &lt;suite&gt;
+all_contents = fh.read() # read all chars
+one_line = fh.readline()
+as_list = fh.readlines()
+</pre>
+</section>
+
+<section>
+<br><h2>Lab01</h2>
+</section>
+
+<section>
+<br><h2>JSON</h2><ul>
+<br><li class="fragment">Javascript Object Notation</li>
+<br><li class="fragment">Part of Javascript language def</li>
+<br><li class="fragment">Easy for parse for humans and machines</li>
+<br><li class="fragment">Language independent, a “lightweight data interchange format”</li>
+<br><li class="fragment">Built on:
+<pre style="padding: 20px">
+Name/value pair collection (dict in Python)
+Ordered list of values (list in Python)
+</pre>
+</li></ul>
+</section>
+
+<section>
+<br><h2>JSON</h2><ul>
+<br><li class="fragment">An “object” is an unordered set of name:value pairs (called “members”) separated by commas and surrounded by curly braces</li>
+<br><li class="fragment">{ Name1:Value2, Name2:Value,… }</li>
+<br><li class="fragment">An “array” is a set of “elements” surrounded by square brackets</li>
+<br><li class="fragment">[ element1, element2,… ]</li>
+<br><li class="fragment">Elements are strings, numbers, true, false, null, object, array</li>
+</ul></section>
+
+<section>
+<br><h2>JSON</h2><ul>
+<br><li class="fragment">Strings are made of:</li>
+<br><li class="fragment">Unicode chars (\uhhhh)</li>
+<br><li class="fragment">\,\\,/,\b,\f,\n,\r,\t</li>
+<br><li class="fragment">Numbers are signed integer, decimal, or exponent (“e”) flavors only</li>
+<br><li class="fragment">Whitespace is fine</li>
+</ul></section>
+
+<section>
+<br><h2>json Module</h2><ul>
+<li class="fragment">import json</li>
+<li class="fragment">Python object to serialized JSON object:</li>
+<pre style="padding: 20px">
+<li class="fragment">json.dump(python_obj, fo, **kwargs)</li>
+<li class="fragment">json.dumps(python_obj, **kwargs)</li>
+</pre>
+<li class="fragment">JSON serialized object back to Python object:</li>
+<pre style="padding: 20px">
+<li class="fragment">python_obj = json.load(fo, **kwargs)</li>
+<li class="fragment">python_obj = json.loads(string, **kwargs)</li>
+<li class="fragment">Note: JSON is not a ”framed” protocol <br>i.e.can’t append multiple JSON objects to same file</li>
+</ul></section>
+
+<section>
+<br><h2>json Module</h2><ul>
+<br><li class="fragment">JSON keys in key/value pairs are always strings. Unlike Python.</li>
+<br><li class="fragment">Default json module encoder only encodes “ASCII-compatible” strings. Use u for other encodings</li>
+<br><li class="fragment">Same name in name:value pairs uses the last one</li>
+<br><li class="fragment">Out of range floats are handled correctly (nan, inf, -inf)</li>
+</ul></section>
+
+<section>
+<br><h2>Python to JSON Translations</h2><ul>
+<pre style="padding: 50px">
+dict -&gt; object
+list, tuple -&gt; array
+str, unicode -&gt; string
+int, float -&gt; number
+True, False -&gt; true, false
+None -&gt; null
+</pre>
+</section>
+
+<section>
+<br><h2>Complex Serializations</h2><ul>
+<br><li class="fragment">Accessing a deep object serialization can be a challenge</li>
+<br><li class="fragment">Remember: only simple objects, maps, and arrays compose a JSON serial object</li>
+<br><li class="fragment">Use subscriptions and keys to get around</li>
+</ul></section>
+
+<section>
+<br><h2>pickle and shelve</h2><ul>
+<br><li class="fragment">The pickle module does a similar job to JSON, but is Python specific</li>
+<br><li class="fragment">Not good for machine data interchange</li>
+<br><li class="fragment">Allows multiple pickled objects to be dumped to the same file (and must be loaded in same order on way back) but shelve is better solution</li>
+<br><li class="fragment">The shelve module essentially provided a persistent dict for pickled objects in a database</li>
+</ul></section>
+
+<section>
+<br><h2>Performance</h2><ul>
+<br><li class="fragment">The builtin json module can be slow</li>
+<br><li class="fragment">Other pypi packages have C extensions to speed them up e.g. simplejson, yajl, python-cjson, and UltraJSON</li>
+</ul></section>
+
+<section>
+<br><h2>Lab02</h2>
+</section>
+
+<section>
+<br><h2>ReST</h2><ul>
+<br><li class="fragment">A simple, client/server web services API currently in favor</li>
+<br><li class="fragment">Way of locating and manipulating “resources” (usually XML or JSON documents) on a network</li>
+<br><li class="fragment">Commonly based HTTP protocol (GET, POST, PUT, DELETE)</li>
+<br><li class="fragment">Stateless (all state on client or server)</li>
+<br><li class="fragment">Simple, predictable resource pathing scheme based on URL</li>
+</ul></section>
+
+<section>
+<br><h2>ReST</h2><ul>
+<br><li class="fragment">ReSTful services generally map a CRUD interface (Create, Read, Update, Delete) by URL mappings that embed data e.g.
+<br>GET v2/{tenant_id}/servers</li>
+<br><li class="fragment">HTTP POST -&gt; Create</li>
+<li class="fragment">GET -&gt; Read</li>
+<li class="fragment">PUT -&gt; Update</li>
+<li class="fragment">DELETE -&gt; Delete</li>
+<br><li class="fragment">HTTP GET calls to a ReSTful service should not change state i.e. read only</li>
+</ul></section>
+
+<section>
+<br><h2>Openstack ReST API</h2><ul>
+<br><li class="fragment">Openstack uses ReST to implement it’s user-controlled cloud provisioning service</li>
+<br><li class="fragment">Requires a set of “endpoint” URL’s which have service request data appended e.g.</li>
+<br><li class="fragment">Adding “v2.0/tokens” to the Identity service “endpoint” URL, inserting login credentials, and POST’ing will return a “token” that allows use of the v2.0 API</li>
+<br><li class="fragment">e.g. Adding “v2/{tenant_id}/servers/ips for the Compute service will return server IP addresses</li>
+</ul></section>
+
+<section>
+<br><h2>Openstack ReST API</h2><ul>
+<br><li class="fragment">See the Openstack API Reference at http://api.openstack.org/ for complete API</li>
+<br><li class="fragment">Workflow to use Openstack API:</li><br>
+<ul>
+<li class="fragment"> Obtain tenant id and API key and authenticate (24 hour timeout)</li>
+<li class="fragment"> Extract token id and appropriate endpoint URL for the desired service from the response</li>
+<li class="fragment"> Send API request(s) to the appropriate service endpoint(s) including the X-Auth-Token HTTP header for each request</li>
+<li class="fragment"> If a 401 HTTP response occurs, re-authenticate</li>
+</ul>
+</ul></section>
+
+<section>
+<br><h2>urllib2 Module</h2><ul>
+<br><li class="fragment">Client functions to access URL’s</li>
+<br><li class="fragment">import urllib2</li>
+<br><li class="fragment">urllib2.urlopen(url[,data]) is a common call signature, where url is the URL of the target resource, and data is to be sent to the server</li>
+<br><li class="fragment">Only HTTP uses data currently. If data exists, it must be URL encoded</li>
+<br><li class="fragment">If data exists, HTTP GET becomes a POST.</li>
+</ul></section>
+
+<section>
+<br><h2>urllib2 Module</h2><ul>
+<br><li class="fragment">A “file-like object” is returned from urlopen() which can be accessed with file semantics (read, readlines, etc.)</li>
+<br><li class="fragment">Raises:
+<pre style="padding: 20px">
+URLError (subclass of IOError)
+HTTPError (subclass of URLError)
+</pre></li>
+<br><li class="fragment">Also takes urllib2.Request objects, useful for including HTTP headers in a dict (or use Request add_header method)</li>
+<br><li class="fragment">Can handle redirections, HTTP error responses, cookies, proxies, HTTP authentication</li>
+</ul></section>
+
+<section>
+<br><h2>Lab03</h2>
+</section>
+
+<section>
+<br><h2>Day 1 Summary/Q&amp;A</h2>
+</section>
+
+<section>
+<br><h2>Basic SQL</h2><ul>
+<br><li class="fragment">Structured Query Language (SQL) is covered in the Intro to MySQL class and many other places
+<pre style="padding: 20px">
+CREATE DATABASE / DROP DATABASE
+CREATE TABLE
+INSERT
+SELECT
+</pre></li>
+<li class="fragment">DB-API defines a standard interface with which to access a relational database from Python</li>
+<br><li class="fragment">Version 2 is current – defined in PEP249 http://www.python.org/dev/peps/pep-0249/</li>
+<br><li class="fragment">Allows choice of thread support and parameter formatting</li>
+</ul></section>
+
+<section>
+<br><h2>DB-API</h2><ul>
+<br><li class="fragment">Has a defined Exception hierarchy:
+<pre style="padding: 20px">
+StandardError
+Warning
+Error
+Interface Error
+Database Error
+</pre></li>
+<br><li class="fragment">Supprts “connection objects” to access database
+<pre style="padding: 20px">
+close()
+commit()
+rollback()
+cursor()
+</pre></li>
+</ul></section>
+
+<section>
+<br><h2>DB-API</h2><ul>
+<br><li class="fragment">Supports cursor objects (essentially a result set iterator for databases) e.g.
+<pre style="padding: 20px">
+execute()
+fetchone()
+fetchmany()
+fetchall()
+</pre></li>
+<br><li class="fragment">Supports binding of database specific constructors for time and date formats to match the target database, and convert Python types to database types</li>
+<br><li class="fragment">Many implementations: we will use a MySQL database and package mysql-python</li>
+</ul></section>
+
+<section>
+<br><h2>MySQLdb DB-API</h2><ul>
+<br><li class="fragment">A PEP-249 implementation for MySQL database</li>
+<br><li class="fragment">Multiple threads can share the module (but need their own Connection objects)</li>
+<br><li class="fragment">Connection parameters (most common):
+<pre style="padding: 20px">
+host (default localhost)
+user
+passwd
+db (default no db)
+port (default 3306: MySQL standard)
+use_unicode=True
+paramstyle (defaults to % format chars; column values only!)
+</pre></li>
+</ul></section>
+
+<section>
+<br><h2>MySQLdb DB-API</h2><ul>
+<br><li class="fragment">Connection.cursor() emulates a cursor (MySQL does not support cursors directly)</li>
+<br><li class="fragment">Connection.commit() and Connection.rollback() work for transactions</li>
+<br><li class="fragment">User Guide at http://mysql-python.sourceforge.net/MySQLdb.html</li>
+<br><li class="fragment">API at http://mysql-python.sourceforge.net/MySQLdb-1.2.2/</li>
+</ul></section>
+
+<section>
+<br><h2>MySQLdb DB-API</h2><ul>
+<br><li class="fragment">Examples:
+<pre style="padding: 50px">
+import MySQLdb
+lab_conn = MysqlDB.connect(host=“x”,
+                           user=“me”,
+                           passwd=“secret”,
+                           db=“lab”)
+lab_cursor = lab_conn.cursor()
+lab_cursor.execute(“select * from bugs
+                           where bug_type = %s
+                           and genus = %i”,
+                           (“butterfly”,3))
+results = lab_cursor.fetchall()
+</pre></li>
+</ul></section>
+
+<section>
+<br><h2>Lab04</h2>
+</section>
+
+<section>
+<br><h2>Python Spawned Processes</h2><ul>
+<br><li class="fragment">Python can spawn and control entire processes using the subprocess module</li>
+<br><li class="fragment">Generally means redirecting the basic file descriptors (stdin, stdout, stderr) to gain programmatic access</li>
+<br><li class="fragment">Forks a new process and uses pipes for redirection</li>
+<br><li class="fragment">As usual, beware of invoking a process based on direct or indirect user input</li>
+</ul></section>
+
+<section>
+<br><h2>subprocess.call()</h2><ul>
+<br><li class="fragment">Use subprocess.Popen class for most use cases, unless a convenience method fits</li>
+<br><li class="fragment">Run command specified in args and *, wait for completion, and return exit code:</li>
+<br><li class="fragment">subprocess.call(args, *, stdin=None, stdout=None, stderr=None, shell=False)</li>
+<br><li class="fragment">Don’t use pipes for stdout or stderr</li>
+<br><li class="fragment">Only use shell=True if need shell features</li>
+</ul></section>
+
+<section>
+<br><h2>subprocess.check_call()</h2><ul>
+<br><li class="fragment">check_call() raises CalledProcessError exception if exit code not 0:
+<br><br>subprocess.check_call(args, *, stdin=None, stdout=None, stderr=None, shell=False)</li>
+<br><li class="fragment">Don’t use pipes for stdout or stderr</li>
+<br><li class="fragment">Only use shell=True if need shell features</li>
+</ul></section>
+
+<section>
+<br><h2>subprocess.check_output()</h2><ul>
+<br><li class="fragment">check_output() returns process output as a byte string:
+<br><br>my_out = subprocess.check_output(args, *, stdin=None, stdout=None, stderr=None, shell=False, universal_newlines=False)</li>
+<br><li class="fragment">Don’t use pipes for stdout or stderr</li>
+<br><li class="fragment">universal_newlines is to convert all line endings to \n</li>
+</ul></section>
+
+<section>
+<br><h2>subprocess Module</h2><ul>
+<br><li class="fragment">Can use subprocess.PIPE in stdin, stdout, stderr</li>
+<br><li class="fragment">Can subprocess.STDOUT in stderr</li>
+<br><li class="fragment">subprocess.Popen(args) constructor has many keyword args too.</li>
+<br><li class="fragment">See http://docs.python.org/library/subprocess.html#module-subprocess</li>
+<br><li class="fragment">Popen args should be a string or sequence (sequence preferred)</li>
+</ul></section>
+
+<section>
+<br><h2>subprocess Module</h2><ul>
+<br><li class="fragment">Note: if args is a string, must use shell=True to specify args</li>
+<br><li class="fragment">Once again, don’t use shell=True with user entered data.</li>
+<br><li class="fragment">shell=False does not call a shell either directly or indirectly, allowing all characters (even metacharacters) to be passed safely</li>
+</ul></section>
+
+<section>
+<br><h2>subprocess Module</h2><ul>
+<br><li class="fragment">Popen methods:</li>
+<pre style="padding: 20px">
+<br><li class="fragment">poll() sees if child is terminated</li>
+<br><li class="fragment">wait() waits for child to terminate</li>
+<br><li class="fragment">communicate(input=None) sends input to child stdin. Use instead of stdin.write()</li>
+<br><li class="fragment">send_signal(signal) sends given signal to child</li>
+<br><li class="fragment">terminate() and kill() send respective signals to child</li>
+</ul></section>
+
+<section>
+<br><h2>subprocess Module</h2><ul>
+<br><li class="fragment">Popen.std* are file objects if std*=PIPE was used in Popen constructor</li>
+<br><li class="fragment">Popen.pid is child process ID</li>
+<br><li class="fragment">Popen.returncode is child exit code. Set by poll(), wait(). None if child not terminated. If negative, indicates child was terminated by that signal number.</li>
+</ul></section>
+
+<section>
+<br><h2>Lab05</h2>
+</section>
+
+<section>
+<br><h2>Python Decorators</h2><ul>
+<br><li class="fragment">Decorators are syntactical sugar for function wraps</li>
+<br><li class="fragment">Start with '@' followed by the decorator name</li>
+<br><li class="fragment">The decorator immediately precedes the decorated function and is called instead when the decorated function is called</li>
+</ul></section>
+
+<section>
+<h3>Decorator Example 1 (No Arguments)</h3>
+<pre><code>
+def make_bold(fn):
+    def wrapped():
+        return "&lt;b&gt;" + fn() + "&lt;/b&gt;"
+    return wrapped
+
+def make_italic(fn):
+    def wrapped():
+        return "&lt;i&gt;" + fn() + "&lt;/i&gt;"
+    return wrapped
+
+@make_bold
+@make_italic
+def hello():
+    return "hello world"
+
+print hello()   #returns &lt;b&gt;&lt;i&gt;hello world&lt;/i&gt;&lt;/b&gt;
+</code></pre>
+</section>
+
+<section>
+<br><h2>Python Decorators</h2><ul>
+<br><li class="fragment">The decorated function reference is passed to the decorator, which can call it or replace it </li>
+<br><li class="fragment">Decorated function arguments are also available to the decorator</li>
+<br><li class="fragment">The decorator returns a new function which is executed</li>
+<br><li class="fragment">See the built-in <em>@property</em> for an example</li>
+<br><li class="fragment">Another example: <em>@logging</em> could add transparent logging to under-lying functions</li>
+</ul></section>
+
+<section>
+<h3> Decorator Example 2 (With Arguments)</h3>
+<br>
+<pre><code>import string
+
+def make_boring(fn):
+    def wrapped(var):
+        return fn(var.strip(string.punctuation).lower())
+    return wrapped
+
+@make_boring
+def print_me(var):
+    print(var)
+
+print_me("HELLO WORLD!!!!!")   #returns "hello world"
+</code></pre>
+</section>
+
+<section>
+<br><h2>Lab06</h2>
+</section>
+
+<section>
+<br><h2>Day 2 Summary/Q&amp;A</h2>
+</section>
+
+<section>
+<br><h2>Threads</h2><ul>
+<br><li class="fragment">Threads are independently scheduled streams of instructions that run within a single OS process</li>
+<br><li class="fragment">Threads have their own stack, registers, scheduling attributes, priorities, signal mask, and thread local memory</li>
+<br><li class="fragment">Threads allow logical concurrency of execution (and possibly parallel execution if configured)</li>
+<br><li class="fragment">Threads introduce the need for synchronization!</li>
+</ul></section>
+
+<section>
+<br><h2>Threads</h2><ul>
+<br><li class="fragment">Threads share the same instructions (bytecodes) same identifier bindings, same open files, and other resources</li>
+<br><li class="fragment">Threads cannot exist outside of an OS process</li>
+<br><li class="fragment">Threads are “lightweight” – the overhead of creating them is much less than creating a real process</li>
+<br><li class="fragment">Threads are used for capturing a higher % of available cycles on a single CPU, realtime systems, an asynchronous event handling.</li>
+</ul></section>
+
+<section>
+<br><h2>Threads</h2><ul>
+<br><li class="fragment">Thread synchronization
+<pre style="padding: 20px">
+<li class="fragment">coarse (involving an entire call)</li>
+<li class="fragment">fine (a section of code)</li>
+<li class="fragment">very fine (a single identifier)</li>
+</pre></li>
+<br><li class="fragment">Thread synchronization failure can cause “deadly embrace” and/or “race conditions”</li>
+<br><li class="fragment">Use thread-safe libraries</li>
+</ul></section>
+
+<section>
+<br><h2>Threads</h2><ul>
+<br><li class="fragment">User threads vs. kernel threads</li>
+<br><li class="fragment">A programming abstraction</li>
+<br><li class="fragment">Kernel thread designs differ substantially by OS</li>
+<br><li class="fragment">Threads may or may not be implemented in the kernel</li>
+<br><li class="fragment">“Green” threads are only implemented in the user process, and not mapped to kernel threads</li>
+</ul></section>
+
+<section>
+<br><h2>POSIX Threads</h2><ul>
+<br><li class="fragment">POSIX (Portable Operating System Interface for Unix) established the POSIX threads (pthreads) standard</li>
+<br><li class="fragment">Pthreads provides a standard interface to maximize available machine resources and minimize complexity e.g. in parallel programming, load balancing, problem partitioning, communications handlers</li>
+<br><li class="fragment">Most OS vendors and modern languages have ported the pthreads model, including Python</li>
+</ul></section>
+
+<section>
+<br><h2>CPython Threads</h2><ul>
+<br><li class="fragment">CPython does map user threads to actual kernel threads, BUT…</li>
+<br><li class="fragment">CPython is not “thread safe”</li>
+<br><li class="fragment">CPython forces a thread to obtain the Global Interpreter Lock (GIL) before running, effectively serializing threads to protect Python interpreter memory</li>
+<br><li class="fragment">CPython forces GIL release every 100 bytecode instructions, allowing other threads to run</li>
+</ul></section>
+
+<section>
+<br><h2>CPython Threads</h2><ul>
+<br><li class="fragment">Thread-safe C extensions bypass the GIL</li>
+<br><li class="fragment">Any blocking I/O also releases the GIL</li>
+<br><li class="fragment">There exists ways to minimize or eliminate the effect of the CPython GIL
+<pre style="padding: 20px">
+<li class="fragment">run in optimized mode</li>
+<li class="fragment">run under a C extension such as a shared library</li>
+<li class="fragment">run under subprocess</li>
+<li class="fragment">call time.sleep()</li>
+<li class="fragment">set sys.setcheckinterval()</li>
+</pre></li>
+</ul></section>
+
+<section>
+<br><h2>Threading Models</h2><ul>
+<br><li class="fragment">Some common threading models exist:</li>
+<br><li class="fragment">Boss/worker
+<ul>
+<li class="fragment">Boss thread creates worker threads, then loops receiving work requests from a queue or socket</li>
+<br>
+<li class="fragment">Worker threads loop on work requests from Boss</li>
+</ul>
+</li>
+</ul></section>
+
+<section>
+<br><h2>Threading Models</h2><ul>
+<br><li class="fragment">Peer
+<ul>
+<li class="fragment">All threads work on the backlog without a “manager” thread</li>
+<br>
+<li class="fragment">All threads generate their own work requests</li>
+</ul></li>
+<br><li class="fragment">Pipeline
+<ul>
+<li class="fragment">Each thread does a stage of a work pipeline</li>
+<br>
+<li class="fragment">Each thread accepts work from “previous” thread, passes to “next” thread</li>
+</ul></li>
+</ul></section>
+
+<section>
+<br><h2>threading Module</h2><ul>
+<br><li class="fragment">Main objects are:
+<ul>
+<li class="fragment">wait for a condition using a lock:<br>
+threading.Condition()</li>
+<br><li class="fragment">wait for an event:<br>
+threading.Event()</li>
+<br><li class="fragment">lock a critical section or variable:<br>
+threading.Lock() or RLock()</li>
+<br><li class="fragment">classic semaphore acquire and release based on count:<br>
+threading.Semaphore()</li>
+</ul>
+</pre></li>
+</ul></section>
+
+<section>
+<br><h2>threading Module</h2><ul>
+<br><li class="fragment">Semaphore with a constained upper bound:
+ threading.BoundedSemaphore()</li>
+<br><li class="fragment">Create a thread:
+ threading.Thread()</li>
+<br><li class="fragment">Run a thread after timer expires:
+ threading.Timer()</li>
+<br><li class="fragment">To create a thread, call Thread constructor with a callable object (or override run() method), then the thread start()</li>
+</ul></section>
+
+<section>
+<br><h2>threading Module</h2><ul>
+<br><li class="fragment">Calling another threads join() causes the caller to wait for thread to end</li>
+<br><li class="fragment">Pass arguments to new thread using the args and kwargs keywords</li>
+<br><li class="fragment">Locks have acquire() and release() methods that can be automatically invoked on the with statement</li>
+</ul></section>
+
+<section>
+<br><h2>threading Module</h2><ul>
+<br><li class="fragment">Condition variables have a wait() to wait for the condition to be reached</li>
+<br><li class="fragment">Condition variables also have notify() and notify_all() that can be used to indicate to other threads that the condition variable has changed</li>
+<br><li class="fragment">Semaphore objects also have acquire() and release() for easy use with with</li>
+<br><li class="fragment">Event objects have set(), clear(), and wait() which indicate if event has happened or not</li>
+</ul></section>
+<section>
+<br><h2>Lab07</h2>
+</section>
+
+<section>
+<br><h2>Multiprocessing Module</h2><ul>
+<br><li class="fragment">Process-based (heavy) threads</li>
+<br><li class="fragment">Similar semantics and methods to threading module</li>
+<br><li class="fragment">Bypasses GIL issues</li>
+</ul>
+</section>
+
+<section>
+<br><h2>Multiprocessing Queue</h2><ul>
+<br><li class="fragment">Thread safe</li>
+<br><li class="fragment">Equivalent to Queue.Queue</li>
+<br><li class="fragment">Provides easy producer/consumer patterns</li>
+<br><li class="fragment">Works between processes</li>
+<br><li class="fragment">get() and put()</li>
+</ul>
+</section>
+
+<section>
+<br><h2>Multiprocessing Pipe</h2><ul>
+<br><li class="fragment">A second method for inter-process communication</li>
+<br><li class="fragment">Cannot share same Pipe end among multiple processes</li>
+<br><li class="fragment">Can connect two processes where each takes one end</li>
+<br><li class="fragment">send() and recv()</li>
+</ul>
+</section>
+
+<section>
+<br><h2>Multiprocess locking</h2><ul>
+<br><li class="fragment">May need to use cooperative locking across processes</li>
+<br><li class="fragment">Same lock semantics as threading module</li>
+<br><li class="fragment">Works across address spaces (processes)</li>
+</ul>
+</section>
+
+<section>
+<br><h2>Multiprocess sharing</h2><ul>
+<br><li class="fragment">2 shared memory facilities across processes </li>
+<br><li class="fragment">Try to avoid -- better to use message passing </li>
+<br><li class="fragment">multiprocessing.Array and multiprocessing.Value</li>
+<br><li class="fragment">multiprocessing.Manager </li>
+<br><li class="fragment">See http://docs.python.org/2/library/multiprocessing.html#module-multiprocessing</li>
+</ul>
+</section>
+
+<section>
+<br><h2>Lab08</h2>
+</section>
+
+<section>
+<h2>Test Driven Development</h2><ul>
+<br><li class='fragment'>Best early detection of bugs: 
+<ul>
+<br>
+<li class='fragment'>Pair programming</li> 
+<li class='fragment'>Continuous Integration</li> 
+<li class='fragment'>Test Driven Development</li>
+</ul></li>
+<br><li class='fragment'>Test Driven Development (TDD) says essentially:
+<ul>
+<br>
+<li class='fragment'>Write a test that for a proposed feature and verify it fails</li>
+<li class='fragment'>Write the minimal amount of code to make the test pass</li>
+<li class='fragment'>Refactor</li>
+<li class='fragment'>Repeat</li>
+</ul></li>
+</ul></section>
+
+<section>
+<h2>unittest Module</h2><ul>
+<br><li class='fragment'>Derive a class from unittest.TestCase</li> 
+<br><li class='fragment'>For a test runner, unittest.main() is the default, or roll your own</li>
+<br><li class='fragment'>Simple test to see if two values were multiplied correctly:
+<pre style="padding: 30px">
+import calculator.operations.arithmetic as arith
+import unittest
+class TestCalculations(unittest.TestCase):
+    def test_multiply(self):
+        """ test multiply 2 * 2 """
+        testVal = arith.mult(2,2)
+        self.assertEqual(testVal, 4)
+        if __name__ == "__main__":
+            unittest.main()
+</pre></li>
+</ul></section>
+
+<section>
+<h2>unittest Module</h2><ul>
+<br><li class='fragment'>If a test fixture is needed to setup/takedown the calculator for each test, we can add methods setUp() and tearDown()</li>
+<br><li class='fragment'>The naming standard is that each test method name start with <em>test</em></li>
+<br><li class='fragment'>For unit tests, the TestCase class offers (3) primary verifiers:
+<ul>
+<br>
+<li class='fragment'>assertEqual(): result is equal to the value we expect</li>
+<li class='fragment'>assertTrue(): result is a True assertion</li>
+<li class='fragment'>assertRaises(): result is the Exception we expect</li>
+</ul></li>
+</ul></section>
+
+<section>
+<h2>unittest Module</h2>
+<br>
+<li class='fragment'>There are more assert methods to make life easy:</li>
+<ul>
+<li class='fragment'>assertNotEqual(): a != b</li>
+<li class='fragment'>assertTrue(): a is True</li>
+<li class='fragment'>assertFalse(): a is False</li>
+<li class='fragment'>assertIs(): a is b</li>
+<li class='fragment'>assertIsNot(): a is not b</li>
+<li class='fragment'>assertIsNone(): a is None</li>
+<li class='fragment'>assertIsNotNone(): a is not None</li>
+</ul>
+</section>
+
+<section>
+<h2>unittest Module</h2>
+<br>
+<li class='fragment'>And some more:</li>
+<ul>
+<li class='fragment'>assertIn(): a in b</li>
+<li class='fragment'>assertNotIn(): a not in b</li>
+<li class='fragment'>assertIsInstance(): isinstance(a, b) is True</li>
+<li class='fragment'>assertIsNotInstance(): isinstance(a, b) is False</li>
+<li class='fragment'>assertGreater(a, b): a &gt; b</li>
+<li class='fragment'>assertRaises(ex): raises ex</li>
+<li class='fragment'>assertRegexMatches(x, re): regex.search(x) is True</li>
+</ul>
+</section>
+
+<section>
+<br><h2>Lab09</h2>
+</section>
+
+<section>
+<h2>mock Module</h2>
+<ul>
+<li class='fragment'>Mock is a library for testing in Python. It allows you to replace parts of your system under test with mock objects and make assertions about how they have been used</li>
+<li class='fragment'>Mock is now part of the Python standard library (versions 3.3+)</li>
+<li class='fragment'>Mock is designed for use with unittest. Mock is based on the ‘action -&gt; assertion’ pattern instead of ‘record -&gt; replay’ used by many mocking frameworks</li>
+</ul>
+</section>
+
+<section>
+<h2>mock Module</h2>
+<p style='text-align: left;'>"Mock" and "MagicMock" objects create all attributes and methods as you access them and store details of how they have been used. You can configure them, to specify return values or limit what attributes are available, and then make assertions about how they have been used.</p>
+<br>
+<pre><code>
+&gt;&gt;&gt; from mock import MagicMock
+&gt;&gt;&gt; inst = Class()
+&gt;&gt;&gt; inst.method = MagicMock(return_value=3)
+&gt;&gt;&gt; inst.method(3, 4, 5, key='value')
+3
+&gt;&gt;&gt; inst.method.assert_called_with(3, 4, 5, key='value')
+</code></pre>
+</section>
+
+<section>
+<h2>mock Module</h2>
+<p style='text-align: left;'>"side_effect" allows you to perform side effects, including raising an exception when a mock is called.</li>
+<br>
+<pre><code>
+&gt;&gt;&gt; mock = Mock(side_effect=KeyError('foo'))
+&gt;&gt;&gt; mock()
+Traceback (most recent call last):
+ ...
+KeyError: 'foo'
+
+&gt;&gt;&gt; values = {'a': 1, 'b': 2, 'c': 3}
+&gt;&gt;&gt; def side_effect(arg):
+...     return values[arg]
+...
+&gt;&gt;&gt; mock.side_effect = side_effect
+&gt;&gt;&gt; mock('a'), mock('b'), mock('c')
+(1, 2, 3)
+&gt;&gt;&gt; mock.side_effect = [5, 4, 3, 2, 1]
+&gt;&gt;&gt; mock(), mock(), mock()
+(5, 4, 3)
+</code></pre>
+</section>
+
+<section>
+<h2>mock Module</h2>
+<p style='text-align: left;'>The patch() decorator / context manager makes it easy to mock classes or objects in a module under test. The object you specify will be replaced with a mock (or other object) during the test and restored when the test ends.</p>
+<code><pre>&gt;&gt;&gt; from mock import patch
+&gt;&gt;&gt; @patch('module.ClassName2')
+... @patch('module.ClassName1')
+... def test(MockClass1, MockClass2):
+...     module.ClassName1()
+...     module.ClassName2()
+
+...     assert MockClass1 is module.ClassName1
+...     assert MockClass2 is module.ClassName2
+...     assert MockClass1.called
+...     assert MockClass2.called
+...
+&gt;&gt;&gt; test()
+</pre></code>
+</section>
+
+<section>
+<h2>mock Module</h2>
+<p style='text-align: left;'>Things to remember about "patch":</p>
+<ul>
+<li>When you nest patch decorators the mocks are passed in to the decorated function in the same order they applied (i.e. the order that decorators are applied). This means from the bottom up, so in the example above the mock for module.ClassName1 is passed in first.</li>
+<li>Be mindful of namespace when using patch. It matters that you patch objects in the namespace where they are looked up.</li>  
+<ul>
+</section>
+
+<section>
+<h2>mock Module</h2>
+<p style='text-align: left;'>"patch" can also be used with context managers:</p>
+<br>
+<pre><code>&gt;&gt;&gt; with patch.object(ProductionClass, 'method', return_value=None) as mock_method:
+...     thing = ProductionClass()
+...     thing.method(1, 2, 3)
+...
+&gt;&gt;&gt; mock_method.assert_called_once_with(1, 2, 3)
+</code></pre>
+</section>
+
+<section>
+<h2>mock and unittest Module</h2>
+<p style='text-align: left;'>Adding "patch" decorators to many methods can become cumbersome. For Python 2.6 or more recent you can use patch (in all its various forms) as a class decorator. This applies the patches to all test methods on the class:</p>
+<pre><code>&gt;&gt;&gt; @patch('mymodule.SomeClass')
+... class MyTest(TestCase):
+...
+...     def test_one(self, MockSomeClass):
+...         self.assertTrue(mymodule.SomeClass is MockSomeClass)
+...
+...     def test_two(self, MockSomeClass):
+...         self.assertTrue(mymodule.SomeClass is MockSomeClass)
+...
+...     def not_a_test(self):
+...         return 'something'
+...
+&gt;&gt;&gt; MyTest('test_one').test_one()
+&gt;&gt;&gt; MyTest('test_two').test_two()
+&gt;&gt;&gt; MyTest('test_two').not_a_test()
+'something'
+</pre></code>
+</section>
+
+
+<section>
+<h2>mock and unittest Module</h2>
+<p style='text-align: left;'>An alternative way of managing patches is to use the patch methods: start and stop. These allow you to move the patching into your setUp and tearDown methods.</p>
+<pre><code>&gt;&gt;&gt; class MyTest(TestCase):
+...     def setUp(self):
+...         self.patcher = patch('mymodule.foo')
+...         self.mock_foo = self.patcher.start()
+...
+...     def test_foo(self):
+...         self.assertTrue(mymodule.foo is self.mock_foo)
+...
+...     def tearDown(self):
+...         self.patcher.stop()
+...
+&gt;&gt;&gt; MyTest('test_foo').run()
+</code></pre>
+</section>
+
+<section>
+<br><h2>Lab10</h2>
+</section>
+
+<section>
+<br><h2>WSGI </h2><ul>
+<br><li class="fragment">Web Server Gateway Interface (PEP333)</li>
+<br><li class="fragment">Standardized interface to web app server to allow portability of apps</li>
+<br><li class="fragment">WSGI app is a callable with parameters for environment dictionary and a callback function that sets HTTP response code and headers</li>
+<br><li class="fragment">WSGI server simply calls the WSGI app and waits for completion, then returns the response to the client</li>
+<br><li class="fragment">Almost all python app servers and apps are WSGI compliant</li>
+</ul></section>
+
+<section><br><h2>ReST API's </h2><ul>
+<br><li class="fragment">Exposes <em>resources</em> with a lightweight service architecture</li>
+<br><li class="fragment">An architecture, <em>not a standard</em></li>
+<br><li class="fragment">Multiple &quot;maturity&quot; levels (Richardson)
+</ul></section>
+
+<section><br><h2>Level0 ReST </h2><ul>
+<br><li class="fragment">Uses a single URI to access resource</li>
+<br><li class="fragment">Tunnels an opaque payload</li>
+<br><li class="fragment">Frequently uses a non-static name as part of URI e.g. a procedure-like name</li>
+<br><li class="fragment">Receiver returns an opaque payload for application-specific interpretation</li>
+<br><li class="fragment">Uses only minimal transport verbs (usually just GET or POST if HTTP)</li>
+</ul></section>
+
+<section><br><h2>Level1 ReST </h2><ul>
+<br><li class="fragment">Similar to Level0 but uses multiple URI's to access resource</li>
+<br><li class="fragment">Each URI reveals a separate element of the resource </li>
+</ul></section>
+
+<section><br><h2>Level2 ReST </h2><ul>
+<br><li class="fragment">Frequently referred to as the "CRUD" level</li>
+<br><li class="fragment">Mapped to GET, POST, PUT, DELETE (if using HTTP)</li>
+<br><li class="fragment">Uses more facilities of the transport layer: 
+<ul>
+<li class="fragment">HTTP headers for meta information </li>
+<li class="fragment">HTTP response codes</li>
+</ul></li>
+</ul></section>
+
+<section><br><h2>Level3 ReST </h2><ul>
+<br><li class="fragment">Highest level </li>
+<br><li class="fragment">Level3 + uses a noun for URI base</li>
+<br><li class="fragment">Implements HATEOS (Hypermedia As The Engine Of Application State)</li>
+<br><li class="fragment">HATEOS provides an application-driven protocol using meta data for dynamic "next step" selection</li>
+</ul></section>
+
+
+<section>
+<br><h2>Lab11</h2>
+</section>
+
+<section>
+<br><h2>Day 3 Summary/Q&amp;A</h2>
+</section>
+
+<section>
+<br><h2>The End</h2>
+</section>
+
+			</div>
+
+		</div>
+
+<script src="lib/js/head.min.js"></script>
+<script src="js/reveal.min.js"></script>
+
+<script>
+Reveal.initialize({
+
+    // Display controls in the bottom right corner
+    controls: true,
+
+    // Display a presentation progress bar
+    progress: true,
+
+    // Push each slide change to the browser history
+    history: false,
+
+    // Enable keyboard shortcuts for navigation
+    keyboard: true,
+
+    // Enable the slide overview mode
+    overview: true,
+
+    // Vertical centering of slides
+    center: true,
+
+    // Loop the presentation
+    loop: false,
+
+    // Change the presentation direction to be RTL
+    rtl: false,
+
+    // Number of milliseconds between automatically proceeding to the 
+    // next slide, disabled when set to 0, this value can be overwritten
+    // by using a data-autoslide attribute on your slides
+    autoSlide: 0,
+
+    // Enable slide navigation via mouse wheel
+    mouseWheel: true,
+
+    // Apply a 3D roll to links on hover
+    rollingLinks: true,
+
+    // Transition style
+    transition: 'default', // default/cube/page/concave/zoom/linear/fade/none
+
+    // The "normal" size of the presentation, aspect ratio will be preserved
+    // when the presentation is scaled to fit different resolutions. Can be
+    // specified using percentage units.
+    width: 960,
+    height: 700,
+
+    // Factor of the display size that should remain empty around the content
+    margin: 0.1,
+
+    // Bounds for smallest/largest possible scale to apply to content
+    minScale: 0.2,
+    maxScale: 1.0,
+
+    dependencies: [
+        // Cross-browser shim that fully implements classList - https://github.com/eligrey/classList.js/
+        { src: 'lib/js/classList.js', condition: function() { return !document.body.classList; } },
+
+        // Interpret Markdown in <section> elements
+        //{ src: 'plugin/markdown/showdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+        //{ src: 'plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+
+        // Syntax highlight for <code> elements
+        { src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+
+        // Zoom in and out with Alt+click
+        { src: 'plugin/zoom-js/zoom.js', async: true, condition: function() { return !!document.body.classList; } },
+
+        // Speaker notes
+        { src: 'plugin/notes/notes.js', async: true, condition: function() { return !!document.body.classList; } },
+
+        // Remote control your reveal.js presentation using a touch device
+        //{ src: 'plugin/remotes/remotes.js', async: true, condition: function() { return !!document.body.classList; } }
+    ]
+});
+
+</script>
+</body>
+</html>

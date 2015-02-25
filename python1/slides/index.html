@@ -1,0 +1,1462 @@
+<!doctype html>
+<html lang="en">
+
+	<head>
+		<meta charset="utf-8">
+
+		<title>Python_I</title>
+
+		<link rel="stylesheet" href="css/reveal.min.css">
+		<link rel="stylesheet" href="css/theme/moon.css" id="theme">
+
+		<!-- For syntax highlighting -->
+		<link rel="stylesheet" href="lib/css/zenburn.css">
+
+		<!-- If the query includes 'print-pdf', use the PDF print sheet -->
+		<script>
+			document.write( '<link rel="stylesheet" href="css/print/' + 
+                        ( window.location.search.match( /print-pdf/gi ) ? 'pdf' : 'paper' ) + 
+                        '.css" type="text/css" media="print">' );
+		</script>
+
+		<!--[if lt IE 9]>
+		<script src="lib/js/html5shiv.js"></script>
+		<![endif]-->
+	</head>
+
+	<body>
+
+		<div class="reveal">
+
+			<!-- Section elements inside of class="slides" div are displayed as a new slide -->
+			<!-- Press ESC to enter the slide overview. -->
+                        <!-- Alt + click on any element to zoom it.  Alt + click anywhere to zoom back out. -->
+			<!-- Press 'b' or '.' to black out slide while talking.  -->
+			<!-- Use links in list: <ul><li><a href="xxx">stuff</a></li></ul> -->
+                        <!-- Transition styles: cube, page, concave, zoom, linear, fade, none. e.g. <a href="?transition=cube#/transitions">Cube</a> -->
+                        <!-- Themes: sky, beige, simple, serif, night.. e.g. <a href="?theme=sky#/themes">Sky</a> -->
+                        <!-- Images:<img width="x" height="y" src="images/xyz.png" alt="Description"> --> 
+                        <!-- Export slides to pdf by using "print-pdf" on URL and cntl-p save as a PDF-->
+			<!-- For editable code use left justified snippets:
+				<pre><code contenteditable>
+function funky( selector ) {
+  if( supports3DTransforms ) {some_random_function()}
+				</code></pre>
+			-->
+                        <!-- Step through bullets with class="fragment" or: 
+						 class="fragment grow"
+						 class="fragment shrink"
+						 class="fragment roll-in"
+						 class="fragment fade-out"
+						 class="fragment highlight-red"
+						 class="fragment highlight-green"
+						 class="fragment highlight-blue"
+                        -->
+			<!-- Sections can be nested for vertical slide navigation -->
+                        <!-- Link between slides internally: e.g. <a href="#/2/3">like this</a> -->
+                        <!-- Can use markdown instead of HTML -->
+                        <!-- Can put popup notes on a slide with <aside class="notes"> Some notes! (hit 's' to see popup)</aside> -->
+
+
+			<div class="slides">
+
+				<section>
+					<h1>Python I</h1>
+					<p>
+					<img  width="600" height="400" src="images/compiling.png" alt="cartoon">
+					</p>
+                                        <br><span style="float:right; font-size: x-small">Revision 04.21.13</span>
+				</section>
+
+
+				<section>
+					<h2>
+NLC Info
+					</h2>
+ 					<ul> 
+						<li class="fragment">
+Rackspace parking sticker works
+						</li><br>
+						<li class="fragment">
+Racker breakroom marked 'Laundry' on 1st floor 
+						</li><br>
+						<li class="fragment">
+Speeding on campus = easy ticket
+						</li><br>
+						<li class="fragment">
+Must go off property to smoke
+						</li><br>
+						<li class="fragment">
+Please sign in each day. Class starts at 08:30
+						</li>
+				</ul></section>
+
+
+				<section>
+					<h2>
+Paperwork
+					</h2><ul>
+						<li class="fragment">
+NLC registration
+						</li><br>
+						<li class="fragment">
+RU roster
+						</li><br>
+						<li class="fragment">
+Email signup sheet
+	 					</li><br>
+<li class="fragment">
+Companion Text: Python Pocket Reference, 4th Edition, Mark Lutz, ISBN 978-0-596-15808-8
+</li>
+				</ul></section>
+
+
+				<section>
+					<h2>
+Introductions
+					</h2><ul>
+						<li class="fragment">
+Instructor Contact Info
+						</li><br>
+						<li class="fragment">
+Introductions
+						</li><br>
+						<li class="fragment">
+Any previous programming?
+						</li><br>
+						<li class="fragment">
+Why did you sign up?
+						</li><br>
+						<li class="fragment">
+Define success for you in this course
+						</li><br>
+				</ul></section>
+
+
+                                <section>
+                                        <h2>
+Lab Info
+                                        </h2><ul>
+                                                <br><li class="fragment">
+Lab machines act as a pass through to the NLC cloud (CentOS VM's)
+                                                </li>
+                                                <br><li class="fragment">
+ssh -l student -p 401XX nlccloud.edgecloud.com<br>
+ (use 192.168.3.10 on campus)
+                                                </li>
+                                                <br><li class="fragment">
+scp -P 401XX local_file student@nlccloud.edgecloud.com:class/remote_file<br>
+scp -P 401XX student@nlccloud.edgecloud.com:class/remote_filename &nbsp;&nbsp;.
+                                                </li>
+                                                <br><li class="fragment">
+Available 24x7 during class
+                                                </li>
+                                </ul></section>
+
+
+
+				<section>
+					<h2>
+Next Lab Environment?
+					</h2><ul>
+						<li class="fragment">
+Raspberry pi: $35 + $10 power supply + $6 flash card
+						</li>
+						<li class="fragment">
+Attaches to USB kybd/mouse, ethernet, HDMI video, audio
+						</li>
+						<li class="fragment">
+Debian or other flavor linux
+						</li>
+						<li class="fragment">
+http://raspberrypi.org
+						</li>
+				</ul>
+<img width="600" height="400" src="images/raspberry-pi.jpg" alt="Raspberry pi photo">
+				</section>
+
+<section><h2>
+This Course </h2><ul>
+<li class="fragment"> Assumes basic programming concepts from Foundation I/II or experience </li>
+<br><li class="fragment"> <strong>What it is:</strong> </li>
+<li class="fragment"> Python (2.7 level) syntax & semantics with an eye toward Python 3 migration </li>
+<li class="fragment"> Complete language through classes, minus a few esoteric features </li>
+<li class="fragment"> Python idioms and style </li>
+<br><li class="fragment"> <strong>What it's not:</strong> </li>
+<li class="fragment">
+Math or graphics, Python internals, Threading, Persistence, other advanced topics
+</li></ul></section>
+
+<section><h2>
+Short Python History
+</h2><ul><li class="fragment"> Written circa 1990 by Guido van Rossum (<em>Google</em> until 12/12, then <em>Dropbox</em>)</li>
+<br><li class="fragment"> Goals were a new general purpose language with good exception handling, clean syntax, good access to underlying OS </li>
+<br><li class="fragment"> First released (posted to USENET) Feb 1991 </li>
+<br><li class="fragment"> Multiple releases since then; Version 3 is current </li>
+<br><li class="fragment"> Driven by PEP (Python Enhancement Process) and managed by the Python Software Foundation (PSF) since 2001 </li>
+</ul></section>
+
+<section><h2>
+Why Learn Python?
+</h2><ul><li class="fragment">
+An <em>in</em> language at the moment and growing in popularity </li>
+<br><li class="fragment">
+Very acceptable performance (CPython impl) especially compared to some other interpreted languages e.g.ruby </li>
+<br><li class="fragment">
+Computer Science programs are starting to adopt as a defacto CS learning language</li>
+<br><li class="fragment"> Probably the easiest, full-featured HLL to learn and use </li>
+<br><li class="fragment"> You can get paid a lot? </li>
+</ul></section>
+
+<section>
+<h2>Python Documentation</h2><ul>
+<br><li class='fragment'>Python is WELL documented, internally and externally</li>
+<br><li class='fragment'>Most important treasure trove is http://docs.python.org</li>
+<br><li class='fragment'>Other resources:</li>
+<ul>
+<li class='fragment'>http://learnpythonthehardway.org/</li>
+<li class='fragment'>http://www.codecademy.com/learn</li>
+<li class='fragment'>http://github.com/gregmalcolm/python_koans/wiki</li>
+<li class='fragment'>http://udacity.com</li>
+<li class='fragment'>Python CBT Nuggets</li>
+</ul>
+</ul></section>
+
+<section>
+<h2>Two Ways to Run Python</h2><ul>
+<br><li class='fragment'>For quick and easy interactive experimentation: <em>ipython</em> </li>
+<ul>
+<br><li class='fragment'>Easy -- can just start typing python syntax</li>
+<br><li class='fragment'>Immediate results (and tracebacks if error)</li>
+<br><li class='fragment'>Good help system and other features</li>
+<br><li class='fragment'>See http://ipython.org</li>
+</ul>
+<br><li class='fragment'>For production and running scripts: <em>python</em> </li>
+</ul></section>
+
+<section>
+<h2>Lab: IPython Orientation</h2>
+</section>
+
+<section>
+<h2>Pythonic Style</h2><ul>
+<li class='fragment'>Pythonistas Live By:
+<pre style="padding: 40px">
+The Zen of Python (PEP20)
+Beautiful is better than ugly.
+Explicit is better than implicit.
+Simple is better than complex.
+Complex is better than complicated.
+Flat is better than nested.
+Sparse is better than dense.
+Readability counts.
+Special cases aren't special enough to break the rules. 
+Although practicality beats purity.
+Errors should never pass silently. Unless explicitly silenced.
+In the face of ambiguity, refuse the temptation to guess.
+There should be one-- and preferably only one --obvious way to do it. 
+Although that way may not be obvious at first unless you're Dutch.
+Now is better than never. Although never is often better than *right* now.
+If the implementation is hard to explain, it's a bad idea.
+If the implementation is easy to explain, it may be a good idea.
+Namespaces are one honking great idea -- let's do more of those!
+</pre></li>
+</ul></section>
+
+<section>
+<h2>Python Indentation</h2><ul>
+<br><li class='fragment'>Critical to correct code function</li>
+<br><li class='fragment'>Indicates program block association</li>
+<br><li class='fragment'>Use 4 spaces per level (per PEP8)</li>
+<br><li class='fragment'>Other style rules apply (covered later)</li>
+</ul></section>
+<section>
+<h2>Identifiers and Objects</h2><ul>
+<p>
+<img  width="600" height="400" src="images/bindings.png" alt="bindings">
+</section>
+
+<section>
+<h2>Python Operators</h2><ul>
+<pre style="padding: 20px">
++       -       *       **      /       //      %
+<<      >>      &       |       ^       ~       <
+>>       <=      >=      ==      !=
+</pre>
+<br><li class='fragment'>Are the same operators you know and love in other languages</li>
+</ul></section>
+
+<section>
+<h2>Python Delimiters</h2><ul>
+<pre style="padding: 20px">
+(       )       [       ]       {       }
+,       :       .       `       =       ;
++=      -=      *=      /=      //=     %=
+&=      |=      ^=      >>=     <<=     **=
+</pre>
+<br><li class='fragment'>$ and ? are invalid in Python except in data strings.</li>
+</ul></section>
+
+<section>
+<h2>Identifier Naming Conventions</h2><ul>
+<br><li class='fragment'>Lower case with _ separators : most variable and function identifiers</li>
+<br><li class='fragment'>Leading _ or __ : special identifiers</li>
+<br><li class='fragment'>All upper case : constants</li>
+<br><li class='fragment'>Camel case : class names</li>
+<br><li class='fragment'>Mixed case : variable and function identifiers (less common)</li>
+</ul></section>
+
+<section>
+<h2>Special Identifiers</h2><ul>
+<br><li class='fragment'>Leading underscore signifies intent to keep that identifier for internal use only: _var</li>
+<br><li class='fragment'>Two leading underscores means (to the interpreter) mangle the identifier i.e. insert the class name before the identifier to make it harder to re-use by accident</li>
+</ul></section>
+
+<section>
+<h2>What is a Module?</h2><ul>
+<br><li class='fragment'>Python modules are the basic building blocks of Python source code. </li>
+<br><li class='fragment'>A module is a file ending in .py containing Python source code</li>
+<br><li class='fragment'>Can use identifiers from other modules by importing them</li>
+<br><li class='fragment'>Lots of modules come with Python distribution, and lots more come as packages downloadable from the net</li>
+</ul></section>
+
+<section>
+<h2>Anatomy of a Module</h2><ul>
+<br><li class='fragment'>#!/usr/bin/env python</li>
+<br><li class='fragment'># -*- coding: utf-8 -*-</li>
+<br><li class='fragment'>Module docstring</li>
+<br><li class='fragment'>Import(s)</li>
+<br><li class='fragment'>Statements (your code)</li>
+</ul></section>
+
+<section>
+<h2>Lab01</h2>
+</section>
+
+<section>
+<h2>Basic Types</h2><ul>
+<br><li class='fragment'>What is a type?</li>
+<br><li class='fragment'>Basic types:</li>
+<br><li class='fragment'>int </li>
+<br><li class='fragment'>float</li>
+<br><li class='fragment'>string</li>
+<br><li class='fragment'>None </li>
+<br><li class='fragment'>bool </li>
+</ul></section>
+
+<section>
+<h2>Lab02</h2>
+</section>
+
+<section>
+<h2>tuple Type</h2><ul>
+<br><li class='fragment'>Tuples are ordered sequences of objects enclosed in parentheses</li>
+<br><li class='fragment'>Objects separated by commas</li>
+<br><li class='fragment'>Cannot be changed (they are immutable)</li>
+<br><li class='fragment'>Can contain any type of object</li>
+<br><li class='fragment'>Can be sliced (remember, they're ordered)</li>
+<br><li class='fragment'>A one element tuple is formed by (element,) using the comma operator</li>
+</ul>
+</section>
+
+<section>
+<h2>list Type</h2><ul>
+<br><li class='fragment'>Lists are essentially mutable tuples</li>
+<br><li class='fragment'>Enclosed in square brackets</li>
+<br><li class='fragment'>One of the two <i>workhorse</i> types of Python</li>
+<br><li class='fragment'>Lots of operations</li>
+</ul></section>
+
+<section>
+<h2>dictionary Type</h2><ul>
+<br><li class='fragment'>Dictionaries are a composed of key:value pairs</li>
+<br><li class='fragment'>Enclosed in curly braces</li>
+<br><li class='fragment'>The key expression is mapped to its associated value expression</li>
+<br><li class='fragment'>Not an ordered sequence</li>
+<br><li class='fragment'>Not sliceable</li>
+</ul></section>
+
+<section>
+<h2>set Type</h2><ul>
+<br><li class='fragment'>Sets are groups of immutable objects with unique values i.e. no duplicates </li>
+<br><li class='fragment'>The set itself is mutable, but not the objects within it</li>
+<br><li class='fragment'>Enclosed in curly braces just like a dictionary</li>
+<br><li class='fragment'>Slicing is not allowed (why?)</li>
+<br><li class='fragment'>Set operations are quite powerful</li>
+</ul></section>
+
+<section>
+<h2>Subscriptions & Slicings</h2><ul>
+<br><li class='fragment'>Sequences are ordered set of objects and can be retrieved in an ordered manner</li>
+<br><li class='fragment'>A subscription is a single member of a sequence</li>
+<br><li class='fragment'>A slicing builds a new sequence by slicing out parts of another sequence</li>
+<br><li class='fragment'>Uses a beginning index, ending index, both, or none</li>
+<br><li class='fragment'>An index can be negative, which wraps around to the beginning</li>
+</ul></section>
+
+<section>
+<h2>Complex Operations</h2><ul>
+<br><li class='fragment'>Partial list:</li>
+<br><li class='fragment'><em>list</em>: append, extend, sort, index, pop, in</li>
+<br><li class='fragment'><em>dict</em>: keys, iterkeys, values, itervalues, items, iteritems, popitem(), in</li>
+<br><li class='fragment'><em>set</em>: difference, union, intersection, symmetric_difference, add, remove, pop, in</li>
+<ul>
+</ul></section>
+
+<section>
+<h2>print Statement</h2><ul>
+<br><li class='fragment'>The print statement prints values of string objects to the output stream</li>
+<br><li class='fragment'>Objects are comma separated if more than one</li>
+<br><li class='fragment'>In Python 2, print is a statement; in Python 3 print is a built-in function (can also use print function in Python 2)</li>
+</ul></section>
+
+<section>
+<h2>Lab03</h2><ul>
+</ul></section>
+
+<section>
+<h2>Operator Precedence</h2><ul>
+<br><li class='fragment'>What's an operator? What's an operand?</li>
+<br><li class='fragment'>Operators have precedence</li>
+<br><li class='fragment'>Order of evaluation can be overridden by parentheses </li>
+<br><li class='fragment'>Python precedence rules are similar to other languages</li>
+</ul></section>
+
+<section>
+<h2>Bitwise Logic Operators</h2><ul>
+<br><li class='fragment'>a AND b => 1 if a and b == 1, else 0</li>
+<li class='fragment'>a OR b => 1 if either a or b == 1, else 0</li>
+<li class='fragment'>a XOR b => 1 if a != b, else 0</li>
+<li class='fragment'>NOT a => 1 if a == 0, else 0</li>
+<br><li class='fragment'>AND mask is used to turn off bits</li>
+<li class='fragment'>e.g. 0b11110000 & 0b11001010 == 0b11000000</li>
+<br><li class='fragment'>OR mask is used to turn on bits:</li>
+<li class='fragment'>e.g. 0b11110000 | 0b11001010 == 0b11111010</li>
+<br><li class='fragment'>NOT is used to invert bits:</li>
+<li class='fragment'>~ 0b11110000 == 0b00001111</li>
+</ul></section>
+
+<section>
+<h2>Lab04</h2>
+</section>
+
+<section>
+<h2>Python Keywords</h2><ul>
+<li class='fragment'>
+<pre style="padding: 20px">
+and       del       from      not       while
+as        elif      global    or        with
+assert    else      if        pass      yield
+break     except    import    print
+class     exec      in        raise
+continue  finally   is        return
+def       for       lambda    try
+</pre></li>
+<br><li class='fragment'>Keywords reserved for use by Python i.e. don't use as your own identifier</li>
+</ul></section>
+
+<section>
+<h2>Statements</h2><ul>
+<br><li class='fragment'>Come in 2 flavors: simple or compound</li>
+<br><li class='fragment'>Simple statements are single keyword, usually 1 per line (but ; can be used to separate multiple simple statements on 1 line)</li>
+<br><li class='fragment'>Compound statements are multi keyword and therefore multi line</li>
+<br><li class='fragment'>Run in suites (statement groups) AKA clauses or blocks when indented</li>
+</ul></section>
+
+<section>
+<h2>Assignment Statements</h2><ul>
+<br><li class='fragment'>An assignment statement binds (connects) identifier on left to an expression on right</li>
+<br><li class='fragment'>An augmented assignment statement does an operation before it binds the answer back to the identifier</li>
+<br><li class='fragment'>Simply a way of combining two statements into one</li>
+</ul></section>
+
+<section>
+<h2>if Statement</h2><ul>
+<br><li class='fragment'>The <em>if</em> statement is a fork in the road: one of the forks is taken depending on a comparison expression</li>
+<br><li class='fragment'>Each intermediate fork (<em>elif</em>) has a suite of statement(s) to run if that fork is taken</li>
+<br><li class='fragment'>The last fork (<em>else</em>) does not have a comparison, and is used when all other comparisons are False</li>
+</ul></section>
+
+<section>
+<h2>Comparisons</h2><ul>
+<br><li class='fragment'>Every language supports comparison of (same-type) values which results in a boolean</li>
+<br><li class='fragment'>Different types should be converted to the same type before comparison. </li>
+<br><li class='fragment'>In a few cases, Python does this for you (e.g. numbers)</li>
+<br><li class='fragment'>Usually used at decision points to control flow</li>
+</ul></section>
+
+<section>
+<h2>for Statement</h2><ul>
+<br><li class='fragment'>The <em>for</em> statement provides a method to loop by iterating over a set of values</li>
+<br><li class='fragment'>At end of loop, the <em>else</em> block is run, if any</li>
+<br><li class='fragment'>An iterator provides the next value every time it's called (until empty)</li>
+<br><li class='fragment'>A sequence (e.g. tuple or list) or some other object can provide the iterator</li>
+<br><li class='fragment'>One (or more) variables receive a new item from the iterator at the beginning of each loop</li>
+</ul></section>
+
+<section>
+<h2>while Statement</h2><ul>
+<br><li class='fragment'><em>while</em> statement provides a means of looping until the test (expression) becomes False</li>
+<br><li class='fragment'>At end of loop, the <em>else</em> block is run, if any</li>
+<br><li class='fragment'>Some things can stop the <em>while</em> prematurely: e.g. break or continue statement, or an exception</li>
+</ul></section>
+
+<section>
+<h2>break & continue Statements</h2><ul>
+<br><li class='fragment'><em>break</em> gets out of a for or while loop early</li>
+<br><li class='fragment'><em>continue</em> restarts the <em>for</em> or <em>while</em> at the beginning of the next loop</li>
+</ul></section>
+
+<section>
+<h2>del Statement</h2><ul>
+<br><li class='fragment'>The del statement unbinds (removes pointer) between an identifier and its object</li>
+<br><li class='fragment'>Can also remove an attribute, subscription, or slicing</li>
+</ul></section>
+
+<section>
+<h2>assert Statement</h2><ul>
+<br><li class='fragment'>assert statement provides a way to stopping execution if the wheels have come off!</li>
+<br><li class='fragment'>The assertion is an expression that should ALWAYS evaluate to True. If not, something is very wrong, so an AssertionError exception is thrown</li>
+<br><li class='fragment'>Optimized bytecode (command line O option) does not do assertion testing</li>
+</ul></section>
+
+<section>
+<h2>pass Statement</h2><ul>
+<br><li class='fragment'>The pass statement says do nothing. </li>
+<br><li class='fragment'>Used if there is a syntactic requirement to have a statement</li>
+</ul></section>
+
+<section>
+<h2>global Statement</h2><ul>
+<br><li class='fragment'>The global statement says skip the local namespace and look in the global namespace first</li>
+<br><li class='fragment'>Should seldom be necessary except for flags (else refactoring may be indicated)</li>
+</ul></section>
+
+<section>
+<h2>Conditional Expression Statement</h2><ul>
+<br><li class='fragment'><em>true_value</em> if <em>expression</em> else <em>false_value</em></li>
+<br><li class='fragment'>Brought to you by PEP308</li>
+<br><li class='fragment'>Reference: http://www.python.org/dev/peps/pep-0308/</li>
+</ul></section>
+
+<section>
+<h2>Lab05</h2>
+</section>
+
+<section>
+<h2>Functions</h2><ul>
+<br><li class='fragment'>A function is a group of statements with a particular goal</li>
+<br><li class='fragment'>Functions have a <em>def</em> declaration to receive input, and a body to do the work:
+<pre>
+def proto(positional args, keyword args, *args, **kwargs):
+    body
+</pre></li>
+<br><li class='fragment'>Use <em>return</em> statement to return an answer back to the caller</li>
+<br><li class='fragment'>Functions are <em>callable objects</em> </li>
+</ul></section>
+
+<section>
+<h2>Functions</h2><ul>
+<br><li class='fragment'>Arguments to functions: positional and keyword</li>
+<br><li class='fragment'>Mini-lab: Interpret these function declarations</li>
+<br><li class='fragment'>def t1(a, b):</li>
+<br><li class='fragment'>def t2(a, b, c=4):</li>
+<br><li class='fragment'>def t3(a, b, c=4, *d, **e):</li>
+</ul></section>
+
+<section>
+<h2>Functions</h2><ul>
+<br><li class='fragment'>How do you call a function?</li>
+<br><li class='fragment'>Positional args go first </li>
+<ul>
+<li class='fragment'>Directly: 1,2,3</li>
+<li class='fragment'>Unpacking an existing tuple or list by putting * before the identifier e.g. *my_tup</li>
+</ul>
+<br><li class='fragment'>Keyword args go last </li>
+<ul>
+<li class='fragment'>Directly: f=6, g=7</li>
+<li class='fragment'>Unpacking an existing dict by putting ** before the identifier e.g. **my_dict</li>
+</ul>
+<br><li class='fragment'>Keyword args convert to positional args if not enough positionals are given</li>
+</ul></section>
+
+<section>
+<h2>return Statement</h2><ul>
+<br><li class='fragment'>The <em>return</em> statement returns value(s) back from a function to the caller</li>
+<br><li class='fragment'>If no <em>return</em> is specified, then None is returned</li>
+</ul></section>
+
+<section>
+<h2>range Function</h2><ul>
+<br><li class='fragment'>range function (a builtin) returns a sequence of integers</li>
+<br><li class='fragment'>Useful for setting up a sequence that the <em>for</em> statement might loop over:
+<pre style="padding: 20px">
+for x in range(100,112):
+    print x,
+</pre></li>
+</ul></section>
+
+<section>
+<h2>raw_input Function</h2><ul>
+<br><li class='fragment'>Use raw_input() to get keyboard input from user </li>
+<br><li class='fragment'>Prompt argument</li>
+<br><li class='fragment'>changes to input() in Python 3</li>
+</ul></section>
+
+<section>
+<h2>lambda Functions</h2><ul>
+<br><li class='fragment'>Provides a way to define anonymous functions
+<pre style="padding: 20px">
+def frollicky(fn, x_position):
+    print "new x-position is", fn(x_position)
+</pre></li>
+<br><li class='fragment'>What would frollicky(lambda x: x**2, 9) do?</li>
+</ul></section>
+
+<section>
+<h2>Lab06</h2>
+</section>
+
+<section>
+<h2>Built-in Functions</h2><ul>
+<br><li class='fragment'>Python has a number of built-in functions (module __builtin__) which are simply wrappers for C functions</li>
+<br><li class='fragment'>Built-in functions perform frequently used or high performance tasks</li>
+<br><li class='fragment'>Reference: Pocket Guide p. 102</li>
+</ul></section>
+
+<section>
+<h2>Lab07</h2>
+</section>
+
+<section>
+<h2>Day 1 Summary/Q&A</h2>
+</section>
+
+<section>
+<h2>os Module</h2><ul>
+<br><li class='fragment'>Operating system and related utilities</li>
+<br><li class='fragment'>Reference: Pocket Guide p.141 OR</li>
+<br><li class='fragment'>http://docs.python.org/library/os.html#module-os</li>
+</ul></section>
+
+<section>
+<h2>os.environ</h2><ul>
+<br><li class='fragment'>The operating system environment is available in the os.environ dictionary
+<pre>
+>>>> env = os.environ
+>>>> env['PWD']
+</pre></li>
+</ul></section>
+
+<section>
+<h2>os.path Module</h2><ul>
+<br><li class='fragment'>Path-related utilities</li>
+<br><li class='fragment'>Reference: Pocket Guide p. 153 OR</li>
+<br><li class='fragment'>http://docs.python.org/library/os.path.html#module-os.path</li>
+</ul></section>
+
+<section>
+<h2>sys Module</h2><ul>
+<br><li class='fragment'>sys module  python interpreter interaction and variables</li>
+<br><li class='fragment'>Reference: Pocket Guide p.133 OR</li>
+<br><li class='fragment'>http://docs.python.org/library/sys.html#module-sys</li>
+</ul></section>
+
+<section>
+<h2>Standard Library</h2><ul>
+<br><li class='fragment'>The Python standard library has many modules available for import besides os and sys. Some are listed below. For a full set, see http://docs.python.org/py-modindex.html
+<p><img  width="600" height="400" src="images/modules.png" alt="modules"></li>
+</ul></section>
+
+<section>
+<h2>Lab08</h2>
+</section>
+
+<section>
+<h2>Stringify An Object</h2><ul>
+<br><li class='fragment'>All objects in Python can be stringified</li>
+<br><li class='fragment'>Use str(obj) which is preferred</li>
+<br><li class='fragment'>Another option is unicode(obj) in Python 2 (Python 3 does not have separate unicode handling for strings)</li>
+<br><li class='fragment'>Back ticks are also available, but seldom used</li>
+</ul></section>
+
+<section>
+<h2>String Literals</h2><ul>
+<br><li class='fragment'>String literals:
+<pre style="padding: 40px">
+'string' or "string", usual escaping rules
+u'string' unicode string
+b'string' normal string in Python 2, bytes string in Python 3
+r'string' raw string: leaves escapes intact
+"""string""" triple quoted string
+string1 string2
+</pre></li>
+</ul></section>
+
+<section>
+<h2>String Methods</h2><ul>
+<br><li class='fragment'>The string type has many useful methods, which are recommended over the string module functions (for efficiency)</li>
+<br><li class='fragment'>Reference: Python Guide p. 26</li>
+</ul></section>
+
+<section>
+<h2>Lab09</h2>
+</section>
+
+<section>
+<h2>String Formatting</h2><ul>
+<br><li class='fragment'>The % string formatting approach:</li>
+<br><li class='fragment'>"string with %format exp" % (arg1)</li>
+<br><li class='fragment'>Considered the old (Python 2) style</li>
+<br><li class='fragment'>Reference: Pocket Reference p.22</li>
+</ul></section>
+
+<section>
+<h2>String Formatting</h2><ul>
+<br><li class='fragment'>The new string.format() method approach:</li>
+<br><li class='fragment'>"string with {format expression}".format(arg1)</li>
+<br><li class='fragment'>Considered the new Python 3 style, but old style will live on for a long time</li>
+<br><li class='fragment'>Reference: Pocket Reference p.23</li>
+</ul></section>
+
+<section>
+<h2>Lab10</h2>
+</section>
+
+<section>
+<h2>List Comprehensions</h2><ul>
+<br><li class='fragment'>Convenient way of initializing a list with an arbitrary expression</li>
+<br><li class='fragment'>Allows control of element source, transformation, and filtering all in one operation:</li>
+<br><li class='fragment'>[insert exp <em>for</em> var <em>in</em> iter <em>if</em> filter exp]</li>
+<br><li class='fragment'>Reference: Pocket Guide p.38</li>
+</ul></section>
+
+<section>
+<h2>Dict & Set Comprehensions</h2><ul>
+<br><li class='fragment'>Shorthand ways of initializing a dictionary or set respectively</li>
+<br><li class='fragment'>Same form as list comphrehension but braces instead of square brackets:</li>
+<br><li class='fragment'>{insert exp <em>for</em> var <em>in</em> iter <em>if</em> filter exp}</li>
+<br><li class='fragment'>Note: for dict, insert expression must generate k and v</li>
+<br><li class='fragment'>Reference: Pocket Guide p.40</li>
+</ul></section>
+
+<section>
+<h2>Iterators</h2><ul>
+<br><li class='fragment'>Iterators know how to return the next item when called </li>
+<br><li class='fragment'>Iterator object is identified by __iter__() and next() functions</li>
+<br><li class='fragment'>StopIteration exception when no more items</li>
+<br><li class='fragment'>Very common. Almost everything seems to implement the iterator protocol</li>
+<br><li class='fragment'>Used by <em>for</em> statement and many functions</li>
+</ul></section>
+
+<section>
+<h2>yield Statement</h2><ul>
+<br><li class='fragment'><em>yield</em> is similar to <em>return</em></li>
+<br><li class='fragment'>Suspends execution of the called function instead of ending the function</li>
+<br><li class='fragment'>On the next call to the function, <em>yield</em> picks up where it left off</li>
+<br><li class='fragment'>All identifier values holding the same values (vs. <em>return</em> which loses its identifier values)</li>
+<br><li class='fragment'>Reference: Pocket Guide p.68</li>
+</ul></section>
+
+<section>
+<h2>Generators</h2><ul>
+<br><li class='fragment'>Generators are co-routines that return a generated (according to your algorithm) set of values (see PEP255)</li>
+<br><li class='fragment'>Identified by a function that uses the <em>yield</em> statement</li>
+<br><li class='fragment'>Generators are just lazy iterators that don't generate a result until needed.</li>
+<br><li class='fragment'>Saves memory</li>
+</ul></section>
+
+<section>
+<h2>Generator Expressions</h2><ul>
+<br><li class='fragment'>Same syntax as a comprehension, but enclosed in parentheses</li>
+<br><li class='fragment'>Shorthand way of writing a generator function to do the same</li>
+<br><li class='fragment'>Called with next() just like an iterator</li>
+<br><li class='fragment'>Saves memory: does not pre-build returned object</li>
+</ul></section>
+
+<section>
+<h2>Lab11</h2>
+</section>
+
+<section>
+<h2>Exceptions</h2><ul>
+<br><li class='fragment'>Exceptions are objects for events that happen asynchronously </li>
+<br><li class='fragment'>Handling an Exception involves a try/except statement</li>
+<br><li class='fragment'>Many Exceptions are built-in, but programmers can create their own custom exceptions too</li>
+<br><li class='fragment'>Custom Exceptions should be based on the Exception class</li>
+</ul></section>
+
+<section>
+<h2>Exceptions</h2><ul>
+<br><li class='fragment'>Exceptions should take a single string arguments saying what happened</li>
+<br><li class='fragment'>Lots of built-in Exceptions</li>
+<br><li class='fragment'>Reference: Pocket Guide p.124</li>
+</ul></section>
+
+<section>
+<h2>try Statement</h2><ul>
+<br><li class='fragment'>The <em>try</em> statement protects a suite of statements that may need an Exception caught in an <em>except</em> clause</li>
+<br><li class='fragment'>The <em>else</em> clause runs if an Exception doesn't happen</li>
+<br><li class='fragment'>The <em>finally</em> cause always runs no matter what happens</li>
+</ul></section>
+
+<section>
+<h2>raise Statement</h2><ul>
+<br><li class='fragment'>The <em>raise</em> statement is used when code wants some attention because of an event.</li>
+<br><li class='fragment'>Although there are some legacy forms of <em>raise</em>, the recommended form is:
+<pre style="padding: 20px">
+raise Exception class(message)
+</pre></li>
+</ul></section>
+
+<section>
+<h2>Duck Typing</h2><ul>
+<br><li class='fragment'>If it walks like a duck, talks like a duck...</li>
+<br><li class='fragment'>Now that we know about Exceptions, the Pythonic way to check an objects type is to use a try block </li>
+<br><li class='fragment'>Call a method or use an 'attribute' as you would expect to use it. If the test works without an Exception, the object may be a duck </li>
+<br><li class='fragment'>If the object isn't ducky enough, catch the Exception and output a nice message or give a chance to retry</li>
+<br><li class='fragment'>Types can also be checked with type(), issubclass(), and isinstance()</li>
+</ul></section>
+
+<section>
+<h2>Lab12</h2>
+</section>
+
+<section>
+<h2>Pythonic Style</h2><ul>
+<br><li class='fragment'>Use <em>is</em> or <em>is not</em> when comparing to True, False, None and other singletons i.e. don't use ==</li>
+<br><li class='fragment'>Always implement all 6 comparison operators if implementing any of them: __eq__, __ne__, __lt__, __le__, __gt__, __ge__</li>
+<br><li class='fragment'>Define your own module and package-specific exception class(es) using Exception as a base (in Python 2)</li>
+</ul></section>
+
+<section>
+<h2>Pythonic Style</h2><ul>
+<br><li class='fragment'>Use multiple except clauses for specific exceptions instead of a catch all except clause (bare except clause will catch even SystemExit and KeyboardInterrupt). </li>
+<br><li class='fragment'>Function parameter keywords should default to None instead of mutables. Immutables are ok</li>
+<br><li class='fragment'>Run only the minimum code necessary in a <em>try</em> block</li>
+<br><li class='fragment'>Use the <em>with</em> statement wherever possible</li>
+</ul></section>
+
+<section>
+<h2>Pythonic Style</h2><ul>
+<br><li class='fragment'>Use .startswith() and .endswith() for prefix and suffix checking</li>
+<br><li class='fragment'>Use duck typing, type(), isinstance(), or issubclass() to check the type</li>
+<br><li class='fragment'>Remember, empty sequences are False. Use that fact in comparisons</li>
+<br><li class='fragment'>Minimize use of <em>global</em></li>
+<br><li class='fragment'>Prefer string methods to the string module. </li>
+<br><li class='fragment'>The built-in functions are fast. Know them and use them</li>
+</ul></section>
+
+<section>
+<h2>Docstrings</h2><ul>
+<br><li class='fragment'>Docstrings provide a convenient way to document your code inline </li>
+<br><li class='fragment'>Docstrings are so important they are saved in the bytecode file </li>
+<br><li class='fragment'>Docstrings allow other software and other programmers to find out what your code does and how it's used</li>
+<br><li class='fragment'>Docstring conventions are standardized. See PEP257</li>
+</ul></section>
+
+<section>
+<h2>Docstrings</h2><ul>
+<br><li class='fragment'>Docstrings are the first item after the boilerplate or header</li>
+<br><li class='fragment'>Docstrings become the __doc__ attribute for the object they describe</li>
+<br><li class='fragment'>All packages, modules, functions, and classes should have docstrings</li>
+<br><li class='fragment'>Come in 2 flavors: one-liner and multi-liner</li>
+</ul></section>
+
+<section>
+<h2>Docstrings</h2><ul>
+<br><li class='fragment'>One-liner docstrings:</li>
+<ul>
+<br><li class='fragment'>Have triple quotes around them, and are on the same line</li>
+<br><li class='fragment'>Have no blank line before or after the docstring</li>
+<br><li class='fragment'>End with a period</li>
+<br><li class='fragment'>Summarize what the code does, and any arguments</li>
+</ul>
+</ul></section>
+
+<section>
+<h2>Docstrings</h2><ul>
+<br><li class='fragment'>Multi-line docstrings:</li>
+<ul>
+<br><li class='fragment'>Have triple quotes around them on their own lines, and blank lines before and after</li>
+<br><li class='fragment'>Start with a summary line followed by another blank line, then the usage details </li>
+<br><li class='fragment'>Explain dependencies and exceptions thrown or caught</li>
+<br><li class='fragment'>End with a period</li>
+</ul>
+</ul></section>
+
+<section>
+<h2>Lab13</h2>
+</section>
+
+<section>
+<h2>Scope & Binding</h2><ul>
+<br><li class='fragment'>Since everything in a Python program is an object, should all objects be available everywhere? </li>
+<br><li class='fragment'>Bindings are not global by default, but instead are restricted to 'namespaces'</li>
+<br><li class='fragment'>Namespaces are used for modules, functions, and 'classes' (new types)</li>
+</ul></section>
+
+<section>
+<h2>Scope & Binding</h2><ul>
+<br><li class='fragment'>
+<pre style="padding: 40px">
+Block: any Python code executed as a unit 
+e.g. a module, def, class, script file, script command, or interactive command 
+</pre></li>
+<br><li class='fragment'>
+<pre style="padding: 40px">
+Scope: the space where a identifier is visible because of its location in a block. 
+Contained blocks can see identifiers of containing blocks
+</pre></li>
+<br><li class='fragment'>
+<pre style="padding: 40px">
+Namespace: the set of identifiers in a function, class, or module. 
+Can be local, global, or built-in. 
+Inward identifiers hide outward identifiers of the same name
+</pre></li>
+</ul></section>
+
+<section>
+<h2>Scope & Binding</h2><ul>
+<br><li class='fragment'>Identifiers in a module or function (<em>def</em>) are visible to inner functions</li>
+<br><li class='fragment'>Class identifiers are not visible to inner functions (methods) without prefixing with class name</li>
+<br><li class='fragment'>Identifiers are local, nonlocal (Python 3 only), global, or built-in</li>
+</ul></section>
+
+<section>
+<h2>Namespace Diagram</h2>
+<p><img  width="600" height="400" src="images/namespaces.png" alt="namespaces image">
+</section>
+
+<section>
+<h2>Scope & Binding</h2><ul>
+<br><li class='fragment'><em>global</em> statement must precede use of a global identifier</li>
+<br><li class='fragment'>Identifier resolution binds an identifier using the nearest enclosing namespace: local, enclosing local, global, builtin</li>
+</ul></section>
+
+<section>
+<h2>Lab14</h2><ul>
+</section>
+
+<section>
+<h2>Day 2 Summary/Q&A</h2>
+</section>
+
+<section>
+<h2>Oh Dear (OOD) </h2><ul>
+<br><li class='fragment'>Classes</li>
+<br><li class='fragment'>Three legged stool:
+<ul>
+<br><li class='fragment'>Inheritance</li>
+<br><li class='fragment'>Encapsulation</li>
+<br><li class='fragment'>Polymorphism</li>
+</ul></li>
+</ul></section>
+
+<section>
+<h2>Python OOP (POOP:)</h2><ul>
+<br><li class='fragment'>Python uses a (thankfully) clear class definition syntax e.g.</li>
+<br><li class='fragment'>
+<pre style="padding: 20px">
+class Halo(Dune, Moon):
+    body
+</pre></li>
+<br><li class='fragment'>This creates a new class object for type Halo with all the methods and attributes of Dune, Moon, and their ancestors.</li>
+<br><li class='fragment'>Also creates a new type called Halo </li>
+</ul></section>
+
+<section>
+<h2>Method Resolution Graph</h2>
+<p><img  width="600" height="400" src="images/mro.png" alt="mro image">
+</section>
+
+<section>
+<h2>Classic vs. New Classes</h2><ul>
+<br><li class='fragment'>Classic-style classes do not inherit from <em>object</em>, and do not become a new type</li>
+<br><li class='fragment'>New-style classes (Python 2.2+) inherit from a built-in type or <em>object</em> and become a new user defined type with type==class 
+name</li>
+<br><li class='fragment'>Classic class instances are type==instance which breaks the class == type rule</li>
+</ul></section>
+
+<section>
+<h2>Classic vs. New Classes</h2><ul>
+<br><li class='fragment'>New classes have different method resolution order (width-first v. depth-first)</li>
+<br><li class='fragment'>Beware: Python 2 <em>class</em> statement still defaults to classic classes unless a new-style class or <em>object</em> is explicitly used as the base class</li>
+<br><li class='fragment'>Classic-style classes go away entirely in Python 3</li>
+<br><li class='fragment'>Always use new-style classes in new code</li>
+</ul></section>
+
+<section>
+<h2>Instances</h2><ul>
+<br><li class='fragment'>instance = <em>classname</em>(args) creates a new instance of <em>class</em> using the <em>classname</em> template </li>
+<br><li class='fragment'>An instance has all attributes of the class, both data and method, but is a separate object with its own namespace</li>
+<br><li class='fragment'>Arguments to the instance creation are passed to the class __init__() method for initialization </li>
+</ul></section>
+
+<section>
+<h2>Methods</h2><ul>
+<br><li class='fragment'>A <em>method</em> is just a function inside a class i.e. it's bound to a class </li>
+<br><li class='fragment'>A <em>method</em> can be an instance method or a class method </li>
+<br><li class='fragment'>First argument to an instance method is always a reference to itself (called <em>self</em>)</li>
+<br><li class='fragment'>If your parent isn't just <em>object</em>, be sure to let parent initialize too:
+<pre style="padding: 20px">
+super(Foo, self).__init__(*args, **kwargs)</pre></li>
+</ul></section>
+
+<section>
+<h2>Think POOP</h2><ul>
+<br><li class='fragment'>Instance attributes are accessible with <em>instance.attrib</em></li>
+<br><li class='fragment'>Instance functions (known as methods) are accessed as <em>instance.method</em>()</li>
+<br><li class='fragment'>Class attributes are accessible with <em>class.attrib</em></li>
+<br><li class='fragment'>Instances do NOT automatically access class identifiers. Must use class name </li>
+</ul></section>
+
+<section>
+<h2>POOP For Real</h2>
+<pre style="padding: 20px">
+>>> class Dog(object):
+...     breed = 1
+...     def __init__(self):
+...         self.breed = 3
+...
+>>> Dog.breed
+1
+>>> my_dog = Dog()
+>>> my_dog.breed
+3
+>>> id(Dog.breed)
+4298191048
+>>> id(my_dog.breed)
+4298191000
+>>> del my_dog.breed
+>>> dir(my_dog)
+['__class__', '__delattr__', '__dict__', '__doc__', '__format__', 
+'__getattribute__', '__hash__', '__init__', '__module__', '__new__', 
+'__reduce__', '__reduce_ex__', '__repr__', '__setattr__', '__sizeof__', 
+'__str__', '__subclasshook__', '__weakref__', breed']
+>>> my_dog.breed
+1
+Why?
+</pre>
+</section>
+
+<section>
+<h2>Lab15</h2>
+</section>
+
+<section>
+<h2>Modules & Packages Redux</h2><ul>
+<br><li class='fragment'>Packages give Python the depth of function to compete with any other language</li>
+<br><li class='fragment'>According to the cheese shop, there are currently 30,000+ Python packages available for import by your code</li>
+<br><li class='fragment'>Don't re-invent the wheel.py Check http://pypi.python.org before you dig</li>
+</ul></section>
+
+<section>
+<h2>Modules & Packages Redux</h2><ul>
+<br><li class='fragment'>Packages are groups of Python modules in a form suitable for runtime access by the interpreter</li>
+<br><li class='fragment'>Must be on the PYTHONPATH environment variable (sys.path)</li>
+<br><li class='fragment'>A special file called __init__.py on each level of hierarchy</li>
+</ul></section>
+
+<section>
+<h2>import & from Statements</h2><ul>
+<br><li class='fragment'>To make a set of identifiers in another module available for use by your module, use <em>import</em> or <em>from</em></li>
+<br><li class='fragment'><em>import</em> pulls in identifiers from module(s) but the module name must be used as a prefix (only the module name is added to local namespace)</li>
+<br><li class='fragment'><em>from</em> pulls in identifiers from modules but avoids need to prefix with the module name (identifier is added to local namespace)</li>
+</ul></section>
+
+<section>
+<h2>Dotted Names</h2><ul>
+<br><li class='fragment'>A dotted name specifies the package/module path required to access a particular .py file.</li>
+<br><li class='fragment'>A dotted name like django_jenkins.management.commands.util is really saying:
+<pre style="padding:20px">
+Find the django_jenkins package on sys.path, then within that 
+for a package called management, then within that for a package 
+called commands, then the util module
+</pre></li>
+</ul></section>
+
+<section>
+<h2>Module Types</h2><ul>
+<br><li class='fragment'>Modules come in (3) flavors: pure, extension, and package</li>
+<br><li class='fragment'>Pure modules are all-Python source</li>
+<br><li class='fragment'>Extension modules are shared objects such as .so or .dll and written in non-Python</li>
+<br><li class='fragment'>Package modules are complex modules containing sub-modules and meta data for package management</li>
+<br><li class='fragment'>See http://docs.python.org/py-modindex.html  for the Python root module index</li>
+</ul></section>
+
+<section>
+<h2>The Calculator Package</h2>
+<img  width="600" height="400" src="images/calculator.png" alt="calculator package image">
+</section>
+
+<section>
+<h2>Module Search</h2><ul>
+<br><li class='fragment'>Python searches for modules in a definite order:</li>
+<ol>
+<br><li class='fragment'> Current directory</li>
+<br><li class='fragment'> PYTHONPATH directories</li>
+<br><li class='fragment'> Installation default directories, if any</li>
+</ol></li>
+<br><li class='fragment'>Reference sys.path for the actual list</li>
+</ul></section>
+
+<section>
+<h2>virtualenv</h2><ul>
+<br><li class='fragment'>Creates an isolated python environment customized to the version and dependency requirements of the resident apps</li>
+<br><li class='fragment'>Comes with distribute, easy_install, and pip</li>
+<br><li class='fragment'>Allows control of environments where root authority is lacking or custom environment is needed</li>
+<br><li class='fragment'>Install and activate/deactivate a new sandbox:
+<pre style="padding: 20px">
+$ curl -O http://python-distribute.org/distribute_setup.py
+$ python distribute_setup.py
+$ curl -O https://raw.github.com/pypa/virtualenv/master/virtualenv.py
+$ python virtualenv.py --distribute ENV
+$ source bin/activate
+</pre></li>
+</ul></section>
+
+<section>
+<h2>pip</h2><ul>
+<br><li class='fragment'>pip is the newest python package manager tool</li>
+<br><li class='fragment'>pip [un]install <package name or package file></li>
+<br><li class='fragment'>pip search <package name></li>
+<br><li class='fragment'>--upgrade option for existing packages</li>
+<br><li class='fragment'>target is site-packages directory </li>
+</ul></section>
+
+<section>
+<h2>site.py</h2><ul>
+<br><li class='fragment'>The <em>site</em> module is automatically imported at python startup (unless -S option)</li>
+<br><li class='fragment'>Tells Python where additional site-specific packages live (if any)</li>
+<br><li class='fragment'>Adds site-specific search paths to the module search path (sys.path) using a path configuration file (<package>.pth)</li>
+<br><li class='fragment'>Path configuration files list additional directories, one per line, needed by <package></li>
+</ul></section>
+
+<section>
+<h2>Your Own Package</h2><ul>
+<br><li class='fragment'>To build your own Python package, arrange your files in a package-ready directory structure with __init__.py in appropriate places, then use distutils module to create a working package ready to upload to the cheese shop</li>
+<br><li class='fragment'>http://guide.python-distribute.org/creation.html for more details</li>
+</ul></section>
+
+<section>
+<h2>Lab16</h2><ul>
+</section>
+
+<section>
+<h2>with Statement</h2><ul>
+<br><li class='fragment'>The <em>with</em> statement is used to run a suite under a context manager </li>
+<br><li class='fragment'>Special methods __entry__() and __exit__() are called to setup and takedown a context</li>
+<br><li class='fragment'>Common for opening a file, which auto-closes the file handle</li>
+</ul></section>
+
+<section>
+<h2>File Processing</h2><ul>
+<br><li class='fragment'>Use the <em>with</em> statement if possible
+<pre style="padding: 30px">
+with open(file_path,mode) as fh:
+          # mode = r for read only; rb for read binary
+          #          w for write only; wb for write binary
+          #          a for append
+
+    # file handles support iteration by line (text mode)
+    for line in fh: # common case
+        suite
+</pre></li>
+<br><li class='fragment'>all_contents = fh.read() # read all chars</li>
+<br><li class='fragment'>n_bytes = fh.read(n) # read 1 < n chars < EOF</li>
+</ul></section>
+
+<section>
+<h2>File Processing</h2><ul>
+<li class='fragment'>one_line = fh.readline() # just until next \n</li>
+<br><li class='fragment'>a_list = fh.readlines() # all chars by line into list</li>
+<br><li class='fragment'>fh.write(s) # write string s to file</li>
+<br><li class='fragment'>fh.writelines(l) # write list l to file</li>
+<br><li class='fragment'>fh.seek(offset) # seeks to offset in file</li>
+</ul></section>
+
+<section>
+<h2>Network I/O</h2><ul>
+<br><li class='fragment'>Network i/o is similar -- iterate as usual:
+<pre style="padding: 20px">
+>>>> import urllib2
+>>>> fh = urllib2.urlopen('http://docs.python.org')
+>>>> for line in fh:
+>>>>...     print line
+</pre></li>
+</ul></section>
+
+<section>
+<h2>OS Commands</h2><ul>
+<br><li class='fragment'>Same with issuing system commands to the underlying OS (the subprocess module is better practice; see Python II)
+<pre style="padding: 20px">
+>>>> with os.popen("ls -1") as fh:
+>...     for line in fh:
+>...         print line
+</pre></li>
+</ul></section>
+
+<section>
+<h2>Lab18</h2>
+</section>
+
+<section>
+<h2>Debugging</h2><ul>
+<br><li class='fragment'>Some Vocab:
+<ul>
+<li class='fragment'>Single step: run one line of code and stop</li>
+<li class='fragment'>Step in: trace into a function</li>
+<li class='fragment'>Step out: return from tracing a function</li>
+<li class='fragment'>Breakpoint: run normally until here, then stop</li>
+<li class='fragment'>Watch list: monitored variables</li>
+</ul></li>
+<br><li class='fragment'>Development: 
+<ul>
+<li class='fragment'>80% solution is <em>print</em> statement</li>
+<li class='fragment'>pudb http://pypi.python.org/pypi/pudb/</li>
+<li class='fragment'>Integrated GUI IDE debugger</li>
+</ul></li>
+<br><li class='fragment'>Production: instrument with a logging module </li>
+</ul></section>
+
+<section>
+<h2>Debugging</h2><ul>
+<br><li class='fragment'>Common debugger commands:
+<ul>
+<li class='fragment'>h(elp)</li>
+<li class='fragment'>w(here)</li>
+<li class='fragment'>b(reak)</li>
+<li class='fragment'>s(tep)</li>
+<li class='fragment'>n(ext)</li>
+<li class='fragment'>r(eturn)</li>
+<li class='fragment'>c(ontinue)</li>
+<li class='fragment'>l(ist)</li>
+<li class='fragment'>p expression</li>
+<li class='fragment'>run [args ...]</li>
+<li class='fragment'>q(uit)</li>
+</ul></li>
+</ul></section>
+
+<section>
+<h2>pudb module</h2><ul>
+Demo
+</ul></section>
+
+<section>
+<h2>Lab19</h2>
+</section>
+
+<section>
+<img  width="600" height="400" src="images/do_it_in_production.png" alt=" image">
+</section>
+
+<section>
+<h2>Test Driven Development</h2><ul>
+<br><li class='fragment'>Best early detection of bugs: 
+<ul>
+<br><li class='fragment'>Pair programming</li> 
+<li class='fragment'>Continuous Integration</li> 
+<li class='fragment'>Test Driven Development</li>
+</ul></li>
+<br><li class='fragment'>Test Driven Development (TDD) says essentially:
+<ul>
+<br><li class='fragment'>Write a test that for a proposed feature and verify it fails</li>
+<li class='fragment'>Write the minimal amount of code to make the test pass</li>
+<li class='fragment'>Refactor</li>
+<li class='fragment'>Repeat</li>
+</ul></li>
+</ul></section>
+
+<section>
+<h2>unittest Module</h2><ul>
+<br><li class='fragment'>Derive a class from unittest.TestCase</li> 
+<br><li class='fragment'>For a test runner, unittest.main() is the default, or roll your own</li>
+<br><li class='fragment'>Simple test to see if two values were multiplied correctly:
+<pre style="padding: 30px">
+import calculator.operations.arithmetic as arith
+import unittest
+class TestCalculations(unittest.TestCase):
+    def test_multiply(self):
+        """ test multiply 2 * 2 """
+        testVal = arith.mult(2,2)
+        self.assertEqual(testVal, 4)
+        if __name__ == "__main__":
+            unittest.main()
+</pre></li>
+</ul></section>
+
+<section>
+<h2>unittest Module</h2><ul>
+<br><li class='fragment'>If a test fixture is needed to setup/takedown the calculator for each test, we can add methods setUp() and tearDown()</li>
+<br><li class='fragment'>The naming standard is that each test method name start with <em>test</em></li>
+<br><li class='fragment'>For unit tests, the TestCase class offers (3) primary verifiers:
+<ul>
+<br><li class='fragment'>assertEqual(): result is equal to the value we expect</li>
+<li class='fragment'>assertTrue(): result is a True assertion</li>
+<li class='fragment'>assertRaises(): result is the Exception we expect</li>
+</ul></li>
+</ul></section>
+
+
+<section>
+<h2>unittest Module</h2><ul>
+<br><li class='fragment'>There are more assert methods to make life easy:
+<p><img  width="600" height="400" src="images/assertions_1.png" alt="assertions part 1 image">
+</li>
+</ul></section>
+
+<section>
+<h2>unittest Module</h2><ul>
+<p><img  width="600" height="400" src="images/assertions_2.png" alt="assertions part 2 image">
+</section>
+
+<section>
+<h2>unittest Module</h2>
+<p><img  width="600" height="400" src="images/assertions_3.png" alt="assertions part 3 image">
+<ul><br><li class='fragment'>Building a test harness involves grouping all TestCase test* methods for the package together to run sequentially:
+</ul></section>
+
+<section>
+<h2>unittest Module</h2>
+<pre style="padding: 20px"><code>
+import unittest
+from  calculator.test import operations_package as op
+from  calculator.test import display_package as dp
+if __name__ == "__main__":
+    ops_suite = op.TestOperations().suite()
+    disp_suite = dp.TestDisplay().suite()
+    all_tests = unittest.TestSuite([ops_suite,disp_suite])
+    result  = unittest.TestResult()
+    print "\nStarting calculator test suite:", \
+    all_tests.countTestCases(),"tests"
+    all_tests.run(result)
+    print "...Errors..."
+    if result.errors:
+        print result.errors
+    else:
+        print  "None"
+    print "...Failures..."
+    if result.failures:
+        for fail in result.failures:
+            print "\n=================================\n"
+            print fail[0]
+            print fail[1]
+    else:
+        print "None
+</code></pre>
+</section>
+
+<section>
+<h2>Lab20</h2>
+</section>
+
+<section>
+<h2>Day 3 Summary/Q&A</h2>
+</section>
+
+<section>
+<h2>References & Bibliography</h2><ul>
+<br><li class='fragment'>Python Style Guide<br>http://python.org/doc/essays/styleguide.html</li>
+<br><li class='fragment'>Refactoring (Martin Fowler, ISBN 0-201-48567-2)</li>
+<br><li class='fragment'>Python Pocket Reference, 4th edition (Mark Lutz, 978-0-596-15080-8)</li>
+<br><li class='fragment'>Think Python (Allen Downey, ISBN-10: 1466367296)</li>
+</ul></section>
+
+<section>
+<h2>References & Bibliography</h2><ul>
+<br><li class='fragment'>Python Software Foundation http://python.org</li>
+<br><li class='fragment'>http://wiki.python.org/moin/PythonBooks</li>
+<br><li class='fragment'>http://python.org/editors</li>
+</ul></section>
+
+				<section>
+					<h2>The End</h2>
+				</section>
+
+			</div>
+
+		</div>
+
+<script src="lib/js/head.min.js"></script>
+<script src="js/reveal.min.js"></script>
+
+<script>
+Reveal.initialize({
+
+    // Display controls in the bottom right corner
+    controls: true,
+
+    // Display a presentation progress bar
+    progress: true,
+
+    // Push each slide change to the browser history
+    history: false,
+
+    // Enable keyboard shortcuts for navigation
+    keyboard: true,
+
+    // Enable the slide overview mode
+    overview: true,
+
+    // Vertical centering of slides
+    center: true,
+
+    // Loop the presentation
+    loop: false,
+
+    // Change the presentation direction to be RTL
+    rtl: false,
+
+    // Number of milliseconds between automatically proceeding to the 
+    // next slide, disabled when set to 0, this value can be overwritten
+    // by using a data-autoslide attribute on your slides
+    autoSlide: 0,
+
+    // Enable slide navigation via mouse wheel
+    mouseWheel: false,
+
+    // Apply a 3D roll to links on hover
+    rollingLinks: true,
+
+    // Transition style
+    transition: 'default', // default/cube/page/concave/zoom/linear/fade/none
+
+    // The "normal" size of the presentation, aspect ratio will be preserved
+    // when the presentation is scaled to fit different resolutions. Can be
+    // specified using percentage units.
+    width: 960,
+    height: 700,
+
+    // Factor of the display size that should remain empty around the content
+    margin: 0.1,
+
+    // Bounds for smallest/largest possible scale to apply to content
+    minScale: 0.2,
+    maxScale: 1.0,
+
+    dependencies: [
+        // Cross-browser shim that fully implements classList - https://github.com/eligrey/classList.js/
+        { src: 'lib/js/classList.js', condition: function() { return !document.body.classList; } },
+
+        // Interpret Markdown in <section> elements
+        //{ src: 'plugin/markdown/showdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+        //{ src: 'plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+
+        // Syntax highlight for <code> elements
+        { src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+
+        // Zoom in and out with Alt+click
+        { src: 'plugin/zoom-js/zoom.js', async: true, condition: function() { return !!document.body.classList; } },
+
+        // Speaker notes
+        { src: 'plugin/notes/notes.js', async: true, condition: function() { return !!document.body.classList; } },
+
+        // Remote control your reveal.js presentation using a touch device
+        //{ src: 'plugin/remotes/remotes.js', async: true, condition: function() { return !!document.body.classList; } }
+    ]
+});
+
+</script>
+</body>
+</html>
