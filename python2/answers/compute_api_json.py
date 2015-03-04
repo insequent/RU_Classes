@@ -54,12 +54,12 @@ def get_compute_public_URL(auth_response):
             endpoints += [value for key,value in endpoint.items() if key == "publicURL"]
     return endpoints
 
-def update_cache(data, type="auth_api_info"):
+def update_cache(data, file_name="auth_api_info"):
     try:
-        with open(type, "w") as output:
+        with open(file_name, "w") as output:
             json.dump(data, output)
     except IOError as e:
-        print("Failed to write to {}! {}".format(type,e))
+        print("Failed to write to {}! {}".format(file_name, e))
 
 if __name__ == "__main__":
     from argparse import ArgumentParser
