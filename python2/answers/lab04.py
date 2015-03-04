@@ -146,6 +146,7 @@ def load_patent_data(filename):
     re_patent_stop = re.compile(r"</PATDOC.+")
     re_patent_first_name = re.compile(r"<NAM><FNM><PDAT>\s*(\w+)\s*.+")
     re_patent_last_name = re.compile(r"<NAM><SNM><STEXT><PDAT>\s*(\w+)\s*.+")
+    # NEED TO FIX
     re_patent_number = re.compile(r"<DATE><PDAT>\s*(.+)\s*</PDAT.+")
     re_patent_filing_date = re.compile(r"<DATE><PDAT>\s*(.*)\s*</PDAT.+")
 

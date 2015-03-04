@@ -6,6 +6,7 @@
 """
 
 
+from os import devnull
 import platform
 import subprocess
 from sys import exc_info
@@ -22,13 +23,14 @@ def commander(*commands):
 
 if __name__ == "__main__":
     
-    print("Calling 'ls -l'...")
-    p = subprocess.call(("ls","-l"), stdout=subprocess.PIPE)
-    print("DONE! The command {}\r\n".format("succeeded" if not p else "failed"))
+    print("Calling subprocess.call(('ls', '-l')...")
+    result = subprocess.call(("ls","-l"))
+    print("DONE! The return code was {}\r\n".format(result))
 
-    print("Calling 'ls -l'...")
-    p = subprocess.call(("ls","-l"), stdout=None)
-    print("DONE! The command {}\r\n".format("succeeded" if not p else "failed"))
+    print("Calling 'ls -l'... with stdout=open('/dev/null', 'w')")
+    with open(devnull, "w") as null:
+       result = subprocess.call(("ls","-l"), stdout=null)
+    print("DONE! The return code was {}\r\n".format(result))
 
     print("Calling '/bogus/command'...")
     try:
@@ -40,7 +42,9 @@ if __name__ == "__main__":
     my_os = platform.system()
 
     if my_os == "Linux":
-        print("Oh running 'Linux' eh?... That doesn\'t actually narrow things down.")
+        print("Oh running 'Linux' eh?... That doesn\'t actually narrow things down.\r\n"
+              "Platform.platform() says {}\r\n".format(platform.platform()))
+
         subprocess.call(r"echo 'Yo!' > tempy;cat tempy", shell=True)
         print("DONE! Ran: bash echo 'Yo!' > tempy;cat tempy\r\n")
     
