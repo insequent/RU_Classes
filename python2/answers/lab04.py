@@ -178,16 +178,15 @@ def load_patent_data(filename):
 
 
 if __name__ == "__main__":
-    import re
     from argparse import ArgumentParser
+    from getpass import getpass
+    from pprint import pprint
+    import re
     from sys import exit
 
     parser = ArgumentParser()
     parser.add_argument("-u", "--username",
                         help="Username for DB access", 
-                        required=True)
-    parser.add_argument("-p", "--password",
-                        help="Password for DB access",
                         required=True)
     parser.add_argument("-s", "--server",
                         help="Hostname where database resides",
@@ -197,10 +196,14 @@ if __name__ == "__main__":
                         default="mytestdb")
     args = parser.parse_args()
 
+    db_password = getpass("Enter the password: ")
+
     patent_db = PatentDB(username=args.username,
-                         password=args.password,
+                         password=db_password,
                          hostname=args.server,
                          database=args.database)
     patent_db.define_db()
     patent_data = load_patent_data("../labs/patent_data.sgm")
     patent_db.load_db(patent_data)
+
+    pprint(patent_db.find_by_patent_number(20010100))
